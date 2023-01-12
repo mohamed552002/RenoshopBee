@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenoshopBee", "RenoshopBee\RenoshopBee.csproj", "{479E2020-BA9B-4EBA-B201-6CE80D3A490C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{479E2020-BA9B-4EBA-B201-6CE80D3A490C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{479E2020-BA9B-4EBA-B201-6CE80D3A490C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{479E2020-BA9B-4EBA-B201-6CE80D3A490C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{479E2020-BA9B-4EBA-B201-6CE80D3A490C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A33F7190-7D03-46BC-909D-63CA13D189F7}
+	EndGlobalSection
+EndGlobal

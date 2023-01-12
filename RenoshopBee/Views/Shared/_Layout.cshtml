@@ -1,0 +1,242 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - SchoolSystem</title>
+    <link rel="stylesheet" href="~/Sass/all.min.css">
+    <link rel="stylesheet" href="~/Sass/scss/bootstrap.css">
+    <link rel="stylesheet" href="~/Sass/style.css">
+    <title>RenoshopBee | Home</title>
+</head>
+
+<body>
+    <!--Start Header-->
+    <header class="bg-black text-white">
+        <!--Social media && contacts Info-->
+        <div class="header-social d-flex flex-column flex-md-row  container-fluid  align-items-center">
+            <div class="info d-none d-sm-flex py-2 gap-5">
+                <div class="phone d-flex align-items-center">
+                    <i class="fas fa-phone"></i>
+                    <span class="phone number ms-3">+1 123 456 789</span>
+                </div>
+                <div class="mail d-flex align-items-center ps-4 border-start">
+                    <i class="far fa-envelope"></i>
+                    <span class="email address ms-3">info@company.com</span>
+                </div>
+            </div>
+            <div class="links d-flex gap-4 align-items-center ms-md-auto ">
+                <a class="text-white" href=""><i class="fab fa-facebook-f facebook"></i></a>
+                <a class="text-white" href=""><i class="fab fab fa-twitter twitter"></i></a>
+                <a class="text-white" href=""><i class="fab fab fa-instagram instagram"></i></a>
+                <a class="text-white" href=""><i class="fab fab fa-linkedin-in linkedin"></i></a>
+                <a class="text-white" href=""><i class="fab fa-github github"></i></a>
+            </div>
+        </div>
+        <!--Social media && contacts Info-->
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <div class="container-fluid flex-sm-column flex-xl-row">
+                <a class="navbar-brand text-uppercase" href="#">
+                    <span class="text-primary fw-bold">RenoShop</span>Bee
+                </a>
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse flex-column flex-md-row" id="collapsibleNavId">
+                    <ul class="navbar-nav  mt-2 mt-lg-0 order-2 order-md-1">
+                        <li class="nav-item active py-3 px-2 px-lg-3">
+                            <a class="nav-link text-uppercase fw-bold" href="#" aria-current="page">Home</a>
+                        </li>
+                        <li class="nav-item py-3 px-2 px-lg-3">
+                            <a class="nav-link text-uppercase fw-bold" href="#">Women</a>
+                        </li>
+                        <li class="nav-item py-3 px-2 px-lg-3">
+                            <a class="nav-link text-uppercase fw-bold" href="#">Men</a>
+                        </li>
+                        <li class="nav-item py-3 px-2 px-lg-3">
+                            <a class="nav-link text-uppercase fw-bold" href="#">Kids</a>
+                        </li>
+                        <li class="nav-item py-3 px-2 px-lg-3">
+                            <a class="nav-link text-uppercase fw-bold" href="#">Jewellery</a>
+                        </li>
+                        <li class="nav-item py-3 px-2 px-lg-3">
+                            <a class="nav-link text-uppercase fw-bold" href="#">Accssories</a>
+                        </li>
+                    </ul>
+                    <div class="others d-flex gap-3 order-1">
+                        <div class="shopping-cart text-black d-flex align-items-center px-2">
+                            <i class="fas fa-shopping-cart button"></i>
+                            <div class="card-items d-flex align-items-center justify-content-center flex-column">
+                                <i class="fas fa-exclamation text-primary p-5 pb-2"></i>
+                                <p class="text-capitalize pb-5">your cart is empty</p>
+                                <button class="close btn btn-primary text-white">Continue Shopping</button>
+                            </div>
+                        </div>
+                        <div class="search-bar text-black d-flex align-items-center px-2">
+                            <i class="fas fa-search"></i>
+                            <div class="search-form d-flex align-items-center justify-content-center">
+                                <input type="search" placeholder="Search">
+                                <button class="btn btn-primary text-white">Search</button>
+                            </div>
+                        </div>
+                        <div class="user-info">
+                            <div class="min-info d-flex align-items-center justify-content-center gap-2  p-2 rounded-pill">
+                                <div class="img img-fluid">
+                                    <img class="img-fluid" src="imgs/skills-05.png" alt="" srcset="">
+                                </div>
+                                <p class="text-black-50 m-0 text-center d-none d-xl-block">
+                                    Welcome Back <br><span class="userName">Yousef</span> !
+                                </p>
+                                <i class="fas fa-chevron-down text-black-50"></i>
+                            </div>
+                            <div class="user-nav">
+                                <ul class="list-unstyled">
+                                    <li class="p-2 my-2 border-bottom d-flex align-items-center gap-2">
+                                        <i class="far fa-user-circle text-primary"></i>
+                                        View Profile
+                                    </li>
+                                    <li class="p-2 my-2 border-bottom d-flex align-items-center gap-2">
+                                        <i class="fas fa-edit text-primary"></i>
+                                        Edit Settings
+                                    </li>
+                                    <li class="p-2 my-2 d-flex align-items-center gap-2">
+                                        <i class="fas fa-moon text-primary"></i>
+                                        Dark Mode
+                                        <div class="Dark-mode-switcher rounded-pill bg-danger"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    
+
+    <footer class="">
+        <div class="container footer-social row align-items-center justify-content-center mx-auto">
+            <p class="col-md-6 col-lg-9 py-3 m-0 border-bottom border-md-0 text-center text-md-start">
+                we are confident
+                we have provided all the
+                best for you. Stay connect with
+                us
+            </p>
+            <div class="links col-md-6 col-lg-3 d-flex gap-4 align-items-center py-3
+            border-start border-end">
+                <a class="text-secondary" href=""><i class="fab fa-facebook-f facebook"></i></a>
+                <a class="text-secondary" href=""><i class="fab fab fa-twitter twitter"></i></a>
+                <a class="text-secondary" href=""><i class="fab fab fa-instagram instagram"></i></a>
+                <a class="text-secondary" href=""><i class="fab fab fa-linkedin-in linkedin"></i></a>
+                <a class="text-secondary" href=""><i class="fab fa-github github"></i></a>
+            </div>
+        </div>
+        <div class="footer-nav border-top m-0 pb-5 pt-3">
+            <div class="container row mx-auto">
+                <div class="info col-md-6 col-lg-3">
+                    <h4 class="header text-uppercase pt-5 pb-3">Information</h4>
+                    <ul class="list-unstyled">
+                        <a href="">
+                        <li class="py-2">Delivery Information</li>
+                        </a>
+                        <a href="">
+                        <li class="py-2">Discount</li>
+                        </a>
+                        <a href="">
+                        <li class="py-2">Sitemap</li>
+                        </a>
+                        <a href="">
+                        <li class="py-2">Privacy Policy</li>
+                        </a>
+                        <a href="">
+                        <li class="py-2">My Account</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="my-account col-md-6 col-lg-3">
+                    <h4 class="header text-uppercase pt-5 pb-3">My Account</h4>
+                    <ul class="list-unstyled">
+                        <a href="">
+                        <li class="py-2">Sign In</li>
+                        </a>
+                        <a href="">
+                        <li class="py-2">View Cart</li>
+                        </a>
+                        <a href="">
+                        <li class="py-2">My Wishlist</li>
+                        </a>
+                        <a href="">
+                        <li class="py-2">Check Out</li>
+                        </a>
+                        <a href="">
+                        <li class="py-2">Track My Order</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="help col-md-6 col-lg-3">
+                    <h4 class="header text-uppercase pt-5 pb-3">Help</h4>
+                    <ul class="list-unstyled">
+                        <a href="">
+                        <li class="py-2">F.A.Q</li>
+                        </a>
+                        <a href="">
+                        <li class="py-2">Shipping</li>
+                        </a>
+                        <a href="">
+                        <li class="py-2">Contact Us</li>
+                        </a>
+                        <a href="">
+                        <li class="py-2">Privacy Policy</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="contact col-md-6 col-lg-3">
+                    <h4 class="header text-uppercase pt-5 pb-3">Contact Info</h4>
+                    <ul class="list-unstyled">
+                        <a class="d-flex align-items-center gap-2" href="">
+                            <i class="fas fa-globe-africa"></i>
+                        <li class="py-2">1234 Giza,Egypt</li>
+                        </a>
+                        <a class="d-flex align-items-center gap-2" href="">
+                            <i class="fas fa-phone"></i>
+                        <li class="py-2">+1 234 5678 9999</li>
+                        </a>
+                        <a class="d-flex align-items-center gap-2" href="mailto:yousef.helly@gmail.com">
+                            <i class="far fa-envelope"></i>
+                        <li class="py-2 text-primary">yousef.helly@gmail.com</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copy-rights bg-black">
+            <p class="container mx-auto text-white-50 m-0 py-3 px-0">
+                &copy;copyright 2022 RenoshopBee all right
+                reserved -
+                Design By
+                RenoshopBee
+            </p>
+        </div>
+    </footer>
+    <!--End Footer-->
+    
+    <script src="~/js/all.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    
+</body>
+
+</html>

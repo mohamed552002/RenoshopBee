@@ -1,0 +1,25 @@
+:root {
+  --main-color: #3cb878;
+  --main-hv-color: #3cb8784a;
+  --sec-color: #f5f6f9;
+}
+//////////////Home Page
+// import Helpers
+@import "./helpers/mixins";
+@import "./helpers/placeholders";
+// import Header
+@import "./page-sections/header";
+//import Landing
+@import "./page-sections/home-page/landing";
+//import best selling
+@import "./page-sections/home-page/best-selling";
+//import featured-products
+@import "./page-sections/home-page/featured-products";
+//import discount
+@import "./page-sections/home-page/discount";
+//import footer
+@import "./page-sections/footer";
+
+//////////////Admin page
+//import product-view
+@import "./page-sections/admin-page/product-view";

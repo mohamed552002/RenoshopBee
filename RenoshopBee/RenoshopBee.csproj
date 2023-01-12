@@ -1,0 +1,124 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Sass\helpers\_mixins.scss" />
+    <None Include="wwwroot\Sass\helpers\_placeholders.scss" />
+    <None Include="wwwroot\Sass\page-sections\home-page\_best-selling.scss" />
+    <None Include="wwwroot\Sass\page-sections\home-page\_discount.scss" />
+    <None Include="wwwroot\Sass\page-sections\home-page\_featured-products.scss" />
+    <None Include="wwwroot\Sass\page-sections\home-page\_landing.scss" />
+    <None Include="wwwroot\Sass\page-sections\_footer.scss" />
+    <None Include="wwwroot\Sass\page-sections\_header.scss" />
+    <None Include="wwwroot\Sass\scss\bootstrap-grid.css.map" />
+    <None Include="wwwroot\Sass\scss\bootstrap-grid.scss" />
+    <None Include="wwwroot\Sass\scss\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\Sass\scss\bootstrap-reboot.scss" />
+    <None Include="wwwroot\Sass\scss\bootstrap-utilities.css.map" />
+    <None Include="wwwroot\Sass\scss\bootstrap-utilities.scss" />
+    <None Include="wwwroot\Sass\scss\bootstrap.css.map" />
+    <None Include="wwwroot\Sass\scss\bootstrap.scss" />
+    <None Include="wwwroot\Sass\scss\forms\_floating-labels.scss" />
+    <None Include="wwwroot\Sass\scss\forms\_form-check.scss" />
+    <None Include="wwwroot\Sass\scss\forms\_form-control.scss" />
+    <None Include="wwwroot\Sass\scss\forms\_form-range.scss" />
+    <None Include="wwwroot\Sass\scss\forms\_form-select.scss" />
+    <None Include="wwwroot\Sass\scss\forms\_form-text.scss" />
+    <None Include="wwwroot\Sass\scss\forms\_input-group.scss" />
+    <None Include="wwwroot\Sass\scss\forms\_labels.scss" />
+    <None Include="wwwroot\Sass\scss\forms\_validation.scss" />
+    <None Include="wwwroot\Sass\scss\helpers\_clearfix.scss" />
+    <None Include="wwwroot\Sass\scss\helpers\_color-bg.scss" />
+    <None Include="wwwroot\Sass\scss\helpers\_colored-links.scss" />
+    <None Include="wwwroot\Sass\scss\helpers\_position.scss" />
+    <None Include="wwwroot\Sass\scss\helpers\_ratio.scss" />
+    <None Include="wwwroot\Sass\scss\helpers\_stacks.scss" />
+    <None Include="wwwroot\Sass\scss\helpers\_stretched-link.scss" />
+    <None Include="wwwroot\Sass\scss\helpers\_text-truncation.scss" />
+    <None Include="wwwroot\Sass\scss\helpers\_visually-hidden.scss" />
+    <None Include="wwwroot\Sass\scss\helpers\_vr.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_alert.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_backdrop.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_banner.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_border-radius.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_box-shadow.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_breakpoints.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_buttons.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_caret.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_clearfix.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_color-scheme.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_container.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_deprecate.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_forms.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_gradients.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_grid.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_image.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_list-group.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_lists.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_pagination.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_reset-text.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_resize.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_table-variants.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_text-truncate.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_transition.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_utilities.scss" />
+    <None Include="wwwroot\Sass\scss\mixins\_visually-hidden.scss" />
+    <None Include="wwwroot\Sass\scss\utilities\_api.scss" />
+    <None Include="wwwroot\Sass\scss\vendor\_rfs.scss" />
+    <None Include="wwwroot\Sass\scss\_accordion.scss" />
+    <None Include="wwwroot\Sass\scss\_alert.scss" />
+    <None Include="wwwroot\Sass\scss\_badge.scss" />
+    <None Include="wwwroot\Sass\scss\_breadcrumb.scss" />
+    <None Include="wwwroot\Sass\scss\_button-group.scss" />
+    <None Include="wwwroot\Sass\scss\_buttons.scss" />
+    <None Include="wwwroot\Sass\scss\_card.scss" />
+    <None Include="wwwroot\Sass\scss\_carousel.scss" />
+    <None Include="wwwroot\Sass\scss\_close.scss" />
+    <None Include="wwwroot\Sass\scss\_containers.scss" />
+    <None Include="wwwroot\Sass\scss\_dropdown.scss" />
+    <None Include="wwwroot\Sass\scss\_forms.scss" />
+    <None Include="wwwroot\Sass\scss\_functions.scss" />
+    <None Include="wwwroot\Sass\scss\_grid.scss" />
+    <None Include="wwwroot\Sass\scss\_helpers.scss" />
+    <None Include="wwwroot\Sass\scss\_images.scss" />
+    <None Include="wwwroot\Sass\scss\_list-group.scss" />
+    <None Include="wwwroot\Sass\scss\_maps.scss" />
+    <None Include="wwwroot\Sass\scss\_mixins.scss" />
+    <None Include="wwwroot\Sass\scss\_modal.scss" />
+    <None Include="wwwroot\Sass\scss\_nav.scss" />
+    <None Include="wwwroot\Sass\scss\_navbar.scss" />
+    <None Include="wwwroot\Sass\scss\_offcanvas.scss" />
+    <None Include="wwwroot\Sass\scss\_pagination.scss" />
+    <None Include="wwwroot\Sass\scss\_placeholders.scss" />
+    <None Include="wwwroot\Sass\scss\_popover.scss" />
+    <None Include="wwwroot\Sass\scss\_progress.scss" />
+    <None Include="wwwroot\Sass\scss\_reboot.scss" />
+    <None Include="wwwroot\Sass\scss\_root.scss" />
+    <None Include="wwwroot\Sass\scss\_spinners.scss" />
+    <None Include="wwwroot\Sass\scss\_tables.scss" />
+    <None Include="wwwroot\Sass\scss\_toasts.scss" />
+    <None Include="wwwroot\Sass\scss\_tooltip.scss" />
+    <None Include="wwwroot\Sass\scss\_transitions.scss" />
+    <None Include="wwwroot\Sass\scss\_type.scss" />
+    <None Include="wwwroot\Sass\scss\_utilities.scss" />
+    <None Include="wwwroot\Sass\scss\_variables.scss" />
+    <None Include="wwwroot\Sass\style.css.map" />
+    <None Include="wwwroot\Sass\style.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+  </ItemGroup>
+
+</Project>
