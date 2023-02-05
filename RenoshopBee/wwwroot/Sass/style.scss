@@ -23,3 +23,16 @@
 //////////////Admin page
 //import product-view
 @import "./page-sections/admin-page/product-view";
+
+//////////////Login page
+//import login
+@import "./page-sections/login/Login";
+
+//////////////product details page
+@import "./page-sections/product-details/product-details";
+
+//////////////cart page
+@import "./page-sections/cart/cart";
+
+//////////////sections page
+@import "./page-sections/sections-pages/shop-grid-full";
