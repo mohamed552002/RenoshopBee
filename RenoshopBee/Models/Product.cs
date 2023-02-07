@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RenoshopBee.Models
 {
@@ -30,19 +31,18 @@ namespace RenoshopBee.Models
         public int Av_in_stock { get; set; }
         [Required(ErrorMessage = "Category is required")]
         public string Category { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime Created_at { get; set; }
+        public int NumOfSales { get; set; }
         public DateTime Last_updated_at { get; set; }
         [ValidateNever]
         [DisplayName("Image")]
         public string Img_url { get; set; }
         [DisplayName("Active")]
         public bool Is_active { get; set; }
+        [ValidateNever]
+        [NotMapped]
+        public ICollection<ProductReview> productReview { get; set; }
 
-    }
-    public class Tags
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
     }
 }

@@ -92,9 +92,6 @@
     &::before {
       content: "$";
     }
-    &::after {
-      content: ".00";
-    }
   }
   .product-rating {
     svg {

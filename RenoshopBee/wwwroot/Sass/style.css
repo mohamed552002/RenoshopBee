@@ -128,9 +128,7 @@ section.best-selling .row .product-card .product-price::before, section.featured
   content: "$";
 }
 
-section.best-selling .row .product-card .product-price::after, section.featured-products .row .product-card .product-price::after, section.dashboard .products-content .products-grid .product-card .product-price::after, section.dashboard .sellers-content .products-grid .product-card .product-price::after, .sellers-requests-grid .request .requested-product .porduct-info .product-price::after, .related-products .products-grid .product-card .product-price::after, section.product-section-grid .products-grid .product-card .product-price::after {
-  content: ".00";
-}
+
 
 section.best-selling .row .product-card .product-rating svg, section.featured-products .row .product-card .product-rating svg, section.dashboard .products-content .products-grid .product-card .product-rating svg, section.dashboard .sellers-content .products-grid .product-card .product-rating svg, .sellers-requests-grid .request .requested-product .porduct-info .product-rating svg, .related-products .products-grid .product-card .product-rating svg, section.product-section-grid .products-grid .product-card .product-rating svg {
   color: #ff9600;
@@ -1392,9 +1390,6 @@ section.dashboard .sellers-content .product-tags .addTag:focus-visible {
   content: "$";
 }
 
-.product-description .product-price::after {
-  content: ".00";
-}
 
 .product-description .product-rating svg {
   color: #ff9600;

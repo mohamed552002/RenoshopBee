@@ -1,4 +1,4 @@
-﻿@model RenoshopBee.Models.Product
+﻿@model RenoshopBee.ViewModels.ProductDetailsVM
 
 @{
     ViewData["Title"] = "Details";
@@ -9,7 +9,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb py-5">
             <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">@Html.DisplayFor(x => x.Category)</a></li>
+            <li class="breadcrumb-item"><a href="#">@Html.DisplayFor(x => x.product.Category)</a></li>
             <li class="breadcrumb-item active" aria-current="page">Product</li>
         </ol>
     </nav>
@@ -17,7 +17,7 @@
     <div class="product-view row my-5">
         <div class="product-pic col-lg-5">
             <div class="img d-flex justify-content-center">
-                <img class="img-fluid" src="@Model.Img_url" alt="">
+                <img class="img-fluid" src="@Model.product.Img_url" alt="">
             </div>
             <div class="other-imgs-slider row  border-top border-bottom justify-content-between">
                 <div class="prev-btn col-1  bg-light d-flex align-items-center justify-content-center">
@@ -34,9 +34,9 @@
             </div>
         </div>
         <div class="product-description col-lg-7 my-5 my-lg-0">
-            <h3 id="productName"> @Html.DisplayFor(m => m.Name)</h3>
+            <h3 id="productName"> @Html.DisplayFor(m => m.product.Name)</h3>
             <div class="product-info d-flex align-items-center">
-                <div class="product-price mb-2 d-inline-block fs-2 pt-2">@Html.DisplayFor(m => m.Price)</div>
+                <div class="product-price mb-2 d-inline-block fs-2 pt-2">@Html.DisplayFor(m => m.product.Price)</div>
                 <div class="product-rating d-inline-block fs-5 ps-3">
                     <i class="fas fas fa-star filled"></i>
                     <i class="fas fas fa-star filled"></i>
@@ -47,7 +47,7 @@
             </div>
 
             <div class="description lh-lg my-3 pb-5 border-bottom">
-                @Html.DisplayFor(m => m.Description)
+                @Html.DisplayFor(m => m.product.Description)
             </div>
             <div class="product-options row mx-1 gap-4">
                 <div class="select-size px-0 col-md-5 border rounded">
@@ -144,70 +144,52 @@
             <div class="tab-pane fade bg-light py-3 px-4" id="Reviews-tab-pane" role="tabpanel"
                  aria-labelledby="Reviews-tab" tabindex="0">
                 <h5>
-                    <span id="revNumber">2</span> reviews for <span id="productName">Sporty Sleevlees Gillet</span>
+                    <span id="revNumber">2</span> reviews for <span id="productName">@Model.product.Name</span>
                 </h5>
                 <div class="reviews-section">
                     <div class="reviews row my-4">
-                        <div class="review-body col-12 row mb-4">
-                            <div class="profile-img d-none d-md-block col-md-2 col-lg-1 my-3">
-                                <img class="img-fluid" src="imgs/dUser.png" alt="user">
-                            </div>
-                            <div class="review-content col-12 col-md-10 col-lg-11 row bg-white p-3 ms-1">
-                                <div class="first-row d-flex flex-column flex-md-row order-2 py-1">
-                                    <div class="product-rating pe-md-4 border-md-end">
-                                        <i class="fas fas fa-star filled"></i>
-                                        <i class="fas fas fa-star filled"></i>
-                                        <i class="fas fas fa-star filled"></i>
-                                        <i class="fas fas fa-star filled"></i>
-                                        <i class="fas fas fa-star filled"></i>
+                        @if (Model.usersReviews != null)
+                        {
+                            @foreach (var item in Model.usersReviews)
+                            {
+                                <div class="review-body col-12 row mb-4">
+                                    <div class="profile-img d-none d-md-block col-md-2 col-lg-1 my-3">
+                                        <img class="img-fluid" src=@item.Img_Url alt="user">
                                     </div>
-                                    <span id="reviewDate"
+                                    <div class="review-content col-12 col-md-10 col-lg-11 row bg-white p-3 ms-1">
+                                        <div class="first-row d-flex flex-column flex-md-row order-2 py-1">
+                                            <div class="product-rating pe-md-4 border-md-end">
+                                                <i class="fas fas fa-star filled"></i>
+                                                <i class="fas fas fa-star filled"></i>
+                                                <i class="fas fas fa-star filled"></i>
+                                                <i class="fas fas fa-star filled"></i>
+                                                <i class="fas fas fa-star filled"></i>
+                                            </div>
+                                            <span id="reviewDate"
                                           class="reviewDate ps-md-4 text-black-50 fst-italic">2022/12/1</span>
-                                </div>
-                                <div class="userName order-1 order-md-2">
-                                    <h6 class="text-uppercase pb-0 pb-md-3 pt-3 fw-bold">john green</h6>
-                                </div>
-                                <div class="review-text order-3">
-                                    This is my first time to buy from here and i'm totally satisfied !
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-body col-12 row mb-4">
-                            <div class="profile-img d-none d-md-block col-md-2 col-lg-1 my-3">
-                                <img class="img-fluid" src="imgs/skills-05.png" alt="user">
-                            </div>
-                            <div class="review-content col-12 col-md-10 col-lg-11 row bg-white p-3 ms-1">
-                                <div class="first-row d-flex flex-column flex-md-row order-2 py-1">
-                                    <div class="product-rating pe-md-4 border-md-end">
-                                        <i class="fas fas fa-star filled"></i>
-                                        <i class="fas fas fa-star filled"></i>
-                                        <i class="fas fas fa-star filled"></i>
-                                        <i class="fas fas fa-star filled"></i>
-                                        <i class="fas fas fa-star filled"></i>
+                                        </div>
+                                        <div class="userName order-1 order-md-2">
+                                            <h6 class="text-uppercase pb-0 pb-md-3 pt-3 fw-bold">@item.FirstName @item.LastName </h6>
+                                        </div>
+                                        <div class="review-text order-3">
+                                            @item.ReviewBody
+                                        </div>
                                     </div>
-                                    <span id="reviewDate"
-                                          class="reviewDate ps-md-4 text-black-50 fst-italic">2022/12/1</span>
                                 </div>
-                                <div class="userName order-1 order-md-2">
-                                    <h6 class="text-uppercase pb-0 pb-md-3 pt-3 fw-bold">Yousef Helly</h6>
-                                </div>
-                                <div class="review-text order-3">
-                                    it's no exaggeration to say this E-commerce website is the best in the whole
-                                    planet.
-                                </div>
-                            </div>
-                        </div>
+                            }
 
+                        }
+                        else
+                        {
+                                    <h3>There is no Reviews</h3>
+                        }
                     </div>
+                    <form method="post" asp-action="AddReview">
                     <div class="addNewRev">
                         <div class="header">
                             <h5 class="mb-4">Add a review</h5>
                         </div>
                         <div class="review-form row container">
-                            <input id="name" class="border  p-2 col-lg-4 me-lg-3 mb-3" type="text" maxlength="20"
-                                   placeholder="Your name ...">
-                            <input id="email" class="border  p-2 col-lg-4 mx-lg-3 mb-3" type="text"
-                                   placeholder="Your e-mail ...">
                             <div class="ratingAndTextarea d-flex align-items-center px-0 my-4 flex-column flex-md-row">
                                 <p class="m-md-0 pe-md-5">Your review</p>
                                 <div class="rating-choose d-flex ms-5 gap-4">
@@ -241,13 +223,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <textarea class="reviewTA col-12 p-2 border rounded me-lg-5"></textarea>
-                            <button id="newComment"
-                                    class="btn btn-primary text-white text-uppercase rounded-0 me-5 py-2 col-6 col-lg-3 mt-3">
-                                submit
-                            </button>
+                            <textarea asp-for="review.ReviewBody" class="reviewTA col-12 p-2 border rounded me-lg-5"></textarea>
+                            <input asp-for="review.ProductId" hidden value="@Model.product.ID" />
+                                <input type="submit" id="newComment" class="btn btn-primary text-white text-uppercase rounded-0 me-5 py-2 col-6 col-lg-3 mt-3"
+                                value="submit"/>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

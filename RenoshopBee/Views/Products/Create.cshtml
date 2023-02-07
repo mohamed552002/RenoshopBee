@@ -97,6 +97,10 @@
                 </div>
                 <label  class="p-0" for="p-t">Available in stock</label>
                 <input asp-for="Av_in_stock" class="border rounded bg-light py-1 mb-md-3 col-8 col-md-2"  id="in-stock">
+                <span asp-validation-for="Av_in_stock"></span>
+                <label class="p-0" for="p-t">Number of sales</label>
+                <input asp-for="NumOfSales" class="border rounded bg-light py-1 mb-md-3 col-8 col-md-2" id="in-stock">
+                <span asp-validation-for="NumOfSales"></span>
                 <label class="p-0" for="p-c">Category</label>
                 <select asp-for="Category" class="border bg-light px-3 py-2 col-md-2 mb-3 rounded text-black-50" 
                         id="p-c">

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<RenoshopBee.Models.Product>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -30,114 +31,36 @@
             </p>
         </div>
         <div class="row col-lg-9">
-            <div class="product-card col-md-6 col-lg-4">
-                <div class="product-img">
-                    <img class="img-fluid" src="imgs/product.png" alt="product">
-                    <div class="product-buttons">
-                        <div class="add-to-cart">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <div class="add-to-wishlist">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="return-product">
-                            <i class="fas fa-retweet"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-name text-capitalize pt-2">
-                    Voyage Yoga Bag
-                </div>
-                <div class="product-price mb-2">250</div>
-                <div class="product-rating">
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas far fa-star unfilled"></i>
-                </div>
-            </div>
-            <div class="product-card col-md-6 col-lg-4">
-                <div class="product-img">
-                    <img class="img-fluid" src="imgs/product.png" alt="product">
-                    <div class="product-buttons">
-                        <div class="add-to-cart">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <div class="add-to-wishlist">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="return-product">
-                            <i class="fas fa-retweet"></i>
+            @foreach (var item in Model)
+            {
+                <div class="product-card col-md-6 col-lg-4">
+                    <div class="product-img">
+                        <img class="img-fluid" src="@item.Img_url" alt="product">
+                        <div class="product-buttons">
+                            <div class="add-to-cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="add-to-wishlist">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="return-product">
+                                <i class="fas fa-retweet"></i>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="product-name text-capitalize pt-2">
-                    Voyage Yoga Bag
-                </div>
-                <div class="product-price mb-2">250</div>
-                <div class="product-rating">
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas far fa-star unfilled"></i>
-                </div>
-            </div>
-            <div class="product-card col-md-6 col-lg-4">
-                <div class="product-img">
-                    <img class="img-fluid" src="imgs/product.png" alt="product">
-                    <div class="product-buttons">
-                        <div class="add-to-cart">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <div class="add-to-wishlist">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="return-product">
-                            <i class="fas fa-retweet"></i>
-                        </div>
+                    <div class="product-name text-capitalize pt-2">
+                        @item.Name
+                    </div>
+                    <div class="product-price mb-2">@item.Price</div>
+                    <div class="product-rating">
+                        <i class="fas fas fa-star filled"></i>
+                        <i class="fas fas fa-star filled"></i>
+                        <i class="fas fas fa-star filled"></i>
+                        <i class="fas fas fa-star filled"></i>
+                        <i class="fas far fa-star unfilled"></i>
                     </div>
                 </div>
-                <div class="product-name text-capitalize pt-2">
-                    Voyage Yoga Bag
-                </div>
-                <div class="product-price mb-2">250</div>
-                <div class="product-rating">
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas far fa-star unfilled"></i>
-                </div>
-            </div>
-            <div class="product-card col-md-6 col-lg-4">
-                <div class="product-img">
-                    <img class="img-fluid" src="imgs/product.png" alt="product">
-                    <div class="product-buttons">
-                        <div class="add-to-cart">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <div class="add-to-wishlist">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="return-product">
-                            <i class="fas fa-retweet"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-name text-capitalize pt-2">
-                    Voyage Yoga Bag
-                </div>
-                <div class="product-price mb-2">250</div>
-                <div class="product-rating">
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas far fa-star unfilled"></i>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </section>
@@ -201,9 +124,11 @@
         <span class="text-primary">Newest trends from top brands</span>
     </div>
     <div class="row py-5">
+        @foreach (var product in Model)
+        {
         <div class="product-card col-md-6 col-lg-3">
             <div class="product-img">
-                <img class="img-fluid" src="imgs/product.png" alt="product">
+                <img class="img-fluid" src=@product.Img_url alt="product">
                 <div class="product-buttons">
                     <div class="add-to-cart">
                         <i class="fas fa-shopping-cart"></i>
@@ -217,9 +142,9 @@
                 </div>
             </div>
             <div class="product-name text-capitalize pt-2">
-                Voyage Yoga Bag
+                @product.Name
             </div>
-            <div class="product-price mb-2">250</div>
+            <div class="product-price mb-2">@product.Price</div>
             <div class="product-rating">
                 <i class="fas fas fa-star filled"></i>
                 <i class="fas fas fa-star filled"></i>
@@ -228,249 +153,7 @@
                 <i class="fas far fa-star unfilled"></i>
             </div>
         </div>
-        <div class="product-card col-md-6 col-lg-3">
-            <div class="product-img">
-                <img class="img-fluid" src="imgs/product.png" alt="product">
-                <div class="product-buttons">
-                    <div class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="add-to-wishlist">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="return-product">
-                        <i class="fas fa-retweet"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-name text-capitalize pt-2">
-                Voyage Yoga Bag
-            </div>
-            <div class="product-price mb-2">250</div>
-            <div class="product-rating">
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas far fa-star unfilled"></i>
-            </div>
-        </div>
-        <div class="product-card col-md-6 col-lg-3">
-            <div class="product-img">
-                <img class="img-fluid" src="imgs/product.png" alt="product">
-                <div class="product-buttons">
-                    <div class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="add-to-wishlist">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="return-product">
-                        <i class="fas fa-retweet"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-name text-capitalize pt-2">
-                Voyage Yoga Bag
-            </div>
-            <div class="product-price mb-2">250</div>
-            <div class="product-rating">
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas far fa-star unfilled"></i>
-            </div>
-        </div>
-        <div class="product-card col-md-6 col-lg-3">
-            <div class="product-img">
-                <img class="img-fluid" src="imgs/product.png" alt="product">
-                <div class="product-buttons">
-                    <div class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="add-to-wishlist">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="return-product">
-                        <i class="fas fa-retweet"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-name text-capitalize pt-2">
-                Voyage Yoga Bag
-            </div>
-            <div class="product-price mb-2">250</div>
-            <div class="product-rating">
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas far fa-star unfilled"></i>
-            </div>
-        </div>
-        <div class="product-card col-md-6 col-lg-3">
-            <div class="product-img">
-                <img class="img-fluid" src="imgs/product.png" alt="product">
-                <div class="product-buttons">
-                    <div class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="add-to-wishlist">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="return-product">
-                        <i class="fas fa-retweet"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-name text-capitalize pt-2">
-                Voyage Yoga Bag
-            </div>
-            <div class="product-price mb-2">250</div>
-            <div class="product-rating">
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas far fa-star unfilled"></i>
-            </div>
-        </div>
-        <div class="product-card col-md-6 col-lg-3">
-            <div class="product-img">
-                <img class="img-fluid" src="imgs/product.png" alt="product">
-                <div class="product-buttons">
-                    <div class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="add-to-wishlist">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="return-product">
-                        <i class="fas fa-retweet"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-name text-capitalize pt-2">
-                Voyage Yoga Bag
-            </div>
-            <div class="product-price mb-2">250</div>
-            <div class="product-rating">
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas far fa-star unfilled"></i>
-            </div>
-        </div>
-        <div class="product-card col-md-6 col-lg-3">
-            <div class="product-img">
-                <img class="img-fluid" src="imgs/product.png" alt="product">
-                <div class="product-buttons">
-                    <div class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="add-to-wishlist">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="return-product">
-                        <i class="fas fa-retweet"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-name text-capitalize pt-2">
-                Voyage Yoga Bag
-            </div>
-            <div class="product-price mb-2">250</div>
-            <div class="product-rating">
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas far fa-star unfilled"></i>
-            </div>
-        </div>
-        <div class="product-card col-md-6 col-lg-3">
-            <div class="product-img">
-                <img class="img-fluid" src="imgs/product.png" alt="product">
-                <div class="product-buttons">
-                    <div class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="add-to-wishlist">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="return-product">
-                        <i class="fas fa-retweet"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-name text-capitalize pt-2">
-                Voyage Yoga Bag
-            </div>
-            <div class="product-price mb-2">250</div>
-            <div class="product-rating">
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas far fa-star unfilled"></i>
-            </div>
-        </div>
-        <div class="product-card col-md-6 col-lg-3">
-            <div class="product-img">
-                <img class="img-fluid" src="imgs/product.png" alt="product">
-                <div class="product-buttons">
-                    <div class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="add-to-wishlist">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="return-product">
-                        <i class="fas fa-retweet"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-name text-capitalize pt-2">
-                Voyage Yoga Bag
-            </div>
-            <div class="product-price mb-2">250</div>
-            <div class="product-rating">
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas far fa-star unfilled"></i>
-            </div>
-        </div>
-        <div class="product-card col-md-6 col-lg-3">
-            <div class="product-img">
-                <img class="img-fluid" src="imgs/product.png" alt="product">
-                <div class="product-buttons">
-                    <div class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="add-to-wishlist">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="return-product">
-                        <i class="fas fa-retweet"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-name text-capitalize pt-2">
-                Voyage Yoga Bag
-            </div>
-            <div class="product-price mb-2">250</div>
-            <div class="product-rating">
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas fas fa-star filled"></i>
-                <i class="fas far fa-star unfilled"></i>
-            </div>
-        </div>
+        }
     </div>
 </section>
 <!--End Featured products-->

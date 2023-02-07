@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RenoshopBee.Data;
 using RenoshopBee.Models;
+using RenoshopBee.ViewModels;
 
 namespace RenoshopBee.Controllers
 {
@@ -16,11 +12,15 @@ namespace RenoshopBee.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ProductsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public ProductsController(ApplicationDbContext context,
+            IWebHostEnvironment webHostEnvironment,
+            UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _userManager = userManager;
         }
         [Authorize]
 
@@ -34,23 +34,53 @@ namespace RenoshopBee.Controllers
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            Console.WriteLine(_context.Products);
             if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
             ViewBag.AllProducts = _context.Products.ToList() ;
-            var product = await _context.Products
+            ProductDetailsVM productDetalis = new ProductDetailsVM();
+            productDetalis.product = await _context.Products
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (product == null)
+            var pr = await _context.ProductReviews.Where(p => p.ProductId == id).ToListAsync();
+            if (pr.Count > 0)
+            {
+                List<ApplicationUser> user = await _context.Users.ToListAsync();
+                productDetalis.usersReviews = user
+                    .Join(pr, user => user.Id
+                    , product => product.UserId
+                    , (user, productReview) => new UsersReviews
+                    {
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Img_Url = user.Img_Url,
+                        ReviewBody = productReview.ReviewBody
+                    });
+            }
+            else
+            {
+                productDetalis.usersReviews = null;
+            }
+            if (productDetalis.product == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(productDetalis);
+        }
+        
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddReview(ProductReview review)
+        {
+            
+            review.UserId =  _userManager.GetUserAsync(User).Result.Id;
+             _context.Add(review);
+            await _context.SaveChangesAsync();
+            return Redirect($"Details/{review.ProductId}");
         }
         [Authorize]
-
         // GET: Products/Create
         public IActionResult Create()
         {
