@@ -63,10 +63,11 @@
                 </div>
                 <div class="input role mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black role" for="role">I'm here as a</label>
-                    <select class="border rounded p-2  bg-light w-100" id="role">
+                    <select asp-for="Input.Role" class="border rounded p-2  bg-light w-100" id="role">
                         <option value="Customer">Customer</option>
                         <option value="Seller">Seller</option>
                     </select>
+                    <span asp-validation-for="Input.Role"></span>
                 </div>
                                 <div class="address mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black address" for="address">Country</label>

@@ -20,9 +20,15 @@ setTimeout(() => {
         document.querySelector(".search-form").classList.remove("show");
         document.querySelector(".card-items").classList.remove("show");
         document.querySelector(".user-nav").classList.toggle("show");
+        console.log("asd");
+    }
+    let sectionSort = document.querySelector(".sort-head");
+    sectionSort.onclick = function(){
+        console.log("dasdas");
+        document.querySelector(".sort").classList.toggle("show");
     }
     document.addEventListener("click",function(e){
-        if(e.path.length<11){
+        if (e.path.length < 11) {
             document.querySelector(".user-nav").classList.remove("show");
             document.querySelector(".card-items").classList.remove("show");
             document.querySelector(".search-form").classList.remove("show");
@@ -73,4 +79,9 @@ window.onscroll = function(){
     else{
         stpBtn.classList.add("d-none");
     }
+
+}
+let sectionSorting = document.querySelector(".filter"); 
+sectionSorting.onclick = function () {
+    document.querySelector(".section-sort").classList.toggle("show");
 }

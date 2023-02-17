@@ -33,7 +33,7 @@
         <div class="row col-lg-9">
             @foreach (var item in Model)
             {
-                <div class="product-card col-md-6 col-lg-4">
+                    <a asp-controller="Products" style="text-decoration:none;color:black;" asp-action="Details" asp-route-id=@item.ID class="product-card col-md-6 col-lg-4">
                     <div class="product-img">
                         <img class="img-fluid" src="@item.Img_url" alt="product">
                         <div class="product-buttons">
@@ -59,7 +59,7 @@
                         <i class="fas fas fa-star filled"></i>
                         <i class="fas far fa-star unfilled"></i>
                     </div>
-                </div>
+                </a>
             }
         </div>
     </div>
@@ -126,7 +126,7 @@
     <div class="row py-5">
         @foreach (var product in Model)
         {
-        <div class="product-card col-md-6 col-lg-3">
+            <a asp-controller="Products" style="text-decoration:none;color:black;" asp-action="Details" asp-route-id=@product.ID class="product-card col-md-6 col-lg-3">
             <div class="product-img">
                 <img class="img-fluid" src=@product.Img_url alt="product">
                 <div class="product-buttons">
@@ -152,7 +152,7 @@
                 <i class="fas fas fa-star filled"></i>
                 <i class="fas far fa-star unfilled"></i>
             </div>
-        </div>
+        </a>
         }
     </div>
 </section>

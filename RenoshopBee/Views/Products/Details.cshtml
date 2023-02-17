@@ -125,21 +125,7 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active  py-3 px-4  bg-light" id="Description-tab-pane" role="tabpanel"
                  aria-labelledby="Description-tab" tabindex="0">
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident nesciunt voluptates natus
-                    obcaecati cum reprehenderit qui, sequi recusandae ipsam dignissimos, fugit architecto
-                    repudiandae quis ad voluptatem ullam fuga sed deleniti!
-                </p>
-                <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum ratione quae numquam voluptas
-                    harum ipsa tempore deserunt in explicabo magnam blanditiis fugiat, rerum enim iure laborum, nisi
-                    libero consequatur perspiciatis.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium nesciunt tempore laudantium
-                    quo numquam magni quaerat, quis deserunt voluptatum molestiae at nisi facilis maiores. Vel
-                    aspernatur ipsum fugiat aliquid non.
-                </p>
+                @Model.product.Description
             </div>
             <div class="tab-pane fade bg-light py-3 px-4" id="Reviews-tab-pane" role="tabpanel"
                  aria-labelledby="Reviews-tab" tabindex="0">
@@ -249,7 +235,7 @@
         <div class="products-grid row py-5">
             @foreach (var item in ViewBag.AllProducts)
             {
-                <div class="product-card col-md-6 col-lg-3">
+                <a style="text-decoration:none;color:black;" asp-action="Details" asp-route-id=@item.ID class="product-card col-md-6 col-lg-3">
                     <div class="product-img">
                         <img class="img-fluid" src="@item.Img_url" alt="product">
                         <div class="product-buttons">
@@ -265,7 +251,7 @@
                         </div>
                     </div>
                     <div class="product-name text-capitalize pt-2">
-                        Men Japanese Letter Graphic Kangaroo Pocket Drawstring Hoodie
+                        @item.Name
 
                     </div>
                     <div class="product-price mb-2">33</div>
@@ -276,7 +262,7 @@
                         <i class="fas fas fa-star filled"></i>
                         <i class="fas far fa-star unfilled"></i>
                     </div>
-                </div>
+                </a>
             }
 
         </div>

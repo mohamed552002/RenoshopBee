@@ -9,20 +9,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using RenoshopBee.Data;
+using RenoshopBee.Models;
 
 namespace RenoshopBee.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext _context;
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         /// <summary>
@@ -43,13 +48,13 @@ namespace RenoshopBee.Areas.Identity.Pages.Account.Manage
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [BindProperty]
-        public InputModel Input { get; set; }
+        public ApplicationUser Input { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
-        public class InputModel
+        public class InputModel : ApplicationUser
         {
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -60,17 +65,19 @@ namespace RenoshopBee.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
-        private async Task LoadAsync(IdentityUser user)
+        private async Task LoadAsync(ApplicationUser user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //var userinit = await _userManager.GetUserAsync(User);
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
-            Username = userName;
-
-            Input = new InputModel
-            {
-                PhoneNumber = phoneNumber
-            };
+            //Username = userName;
+             Input = await _userManager.GetUserAsync(User);
+            Address address = await _context.Address.Where(ad => ad.ApplicationUserId == Input.Id).FirstOrDefaultAsync();
+            Input.address = address;
+            //Input = new InputModel
+            //{
+            //    PhoneNumber = phoneNumber
+            //};
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -82,6 +89,8 @@ namespace RenoshopBee.Areas.Identity.Pages.Account.Manage
             }
 
             await LoadAsync(user);
+            //var Input = await _userManager.GetUserAsync(User);
+
             return Page();
         }
 
@@ -98,17 +107,18 @@ namespace RenoshopBee.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
-
+            
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
+            user.FirstName = Input.FirstName;
+            user.LastName = Input.LastName;
+            user.PhoneNumber = Input.PhoneNumber;
+                var Result = await _userManager.UpdateAsync(user);
+                //var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+                if (!Result.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
-                }
-            }
+                }         
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

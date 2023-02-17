@@ -96,7 +96,8 @@ namespace RenoshopBee.Areas.Identity.Pages.Account
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
-
+            [Required]
+            public string Role { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -159,15 +160,14 @@ namespace RenoshopBee.Areas.Identity.Pages.Account
                 };
                 addressIn.ApplicationUserId = user.Id;
 
-                _context.Add(addressIn);
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
-                await _context.SaveChangesAsync();
+                await _userManager.AddToRoleAsync(user, Input.Role);
+
                 if (result.Succeeded )
                 {
                     _logger.LogInformation("User created a new account with password.");
-
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -190,6 +190,8 @@ namespace RenoshopBee.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
+
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);

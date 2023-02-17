@@ -1,0 +1,92 @@
+@model IEnumerable<RenoshopBee.Models.Product>
+
+@{
+    ViewData["Title"] = $"{ViewBag.SectionName}";
+}
+
+<section class="product-section-grid container">
+<!--breadcrumb componant-->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb py-5">
+                <li class="breadcrumb-item"><a asp-controller="Home"> Home </a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewBag.SectionName</li>
+            </ol>
+        </nav>
+        <!--breadcrumb componant-->
+    <div class="filtering-products border-bottom d-flex justify-content-between mb-2 flex-column flex-md-row align-items-center align-items-md-start gap-4 gap-md-0">
+        <div class="sort-head row">
+            <div class="results text-black-50 order-2 col-6">
+                <p>Showing @(ViewBag.PFrom)-@(ViewBag.PTo) of @ViewBag.allProducts results</p>
+            </div>
+            <div class="filter text-black-50 order-1 col-6 justify-content-right">
+                Sort by newness
+                <i class="fas fa-chevron-down ps-5"></i>
+            </div>
+        </div>
+        <div class="sort">
+            <ul class="list-group">
+                <li class="list-group-item"><a asp-action="Sections" asp-route-section=@ViewBag.SectionName asp-route-sort="Price" style="text-decoration:none;">Price</a></li>
+                <li class="list-group-item"><a asp-action="Sections" asp-route-section=@ViewBag.SectionName asp-route-sort="Modified" style="text-decoration:none;">Date Modified</a></li>
+            </ul>
+        </div>
+    </div>
+        <div class="products-grid row py-5">
+        @if (Model.Count() < 1)
+        {
+            <p class="text-center">There are no products</p>
+        }
+            @foreach (var product in Model)
+            {
+                <div class="product-card col-md-6 col-lg-3">
+                    <div class="product-img">
+                        <img class="img-fluid" src=@product.Img_url alt="product">
+                        <div class="product-buttons">
+                            <div class="add-to-cart">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="add-to-wishlist">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="return-product">
+                                <i class="fas fa-retweet"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-name text-capitalize pt-2">
+                        @product.Name
+
+                    </div>
+                    <div class="product-price mb-2">@product.Price</div>
+                    <div class="product-rating">
+                        <i class="fas fas fa-star filled"></i>
+                        <i class="fas fas fa-star filled"></i>
+                        <i class="fas fas fa-star filled"></i>
+                        <i class="fas fas fa-star filled"></i>
+                        <i class="fas far fa-star unfilled"></i>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="pages mx-5 my-5 d-flex justify-content-center">
+@*            <button class="prev-btn rounded border bg-light px-3">
+                Previous
+            </button>*@
+        @for (int i = 0; i < ViewBag.allProducts/10; i++)
+        {
+            <a asp-action="Sections" asp-route-section=@ViewBag.SectionName asp-route-sort=@ViewBag.sort asp-route-pageNumber=1 class="btn py-2 px-3 bg-primary text-white border">1</a>
+
+        }
+@*            <button class="next-btn rounded border bg-light px-3">
+                Next
+            </button>*@
+        </div>
+</section>
+@section Scripts{
+<script >
+    let sectionSort = document.querySelector(".sort-head");
+    sectionSort.onclick = function () {
+        console.log("dasdas");
+        document.querySelector(".sort").classList.toggle("show");
+    }
+</script>
+}

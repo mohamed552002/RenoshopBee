@@ -1,0 +1,95 @@
+﻿@model RenoshopBee.Models.ApplicationUser
+
+    <div class="team-single">
+        <div class="row">
+            <div class="col-lg-4 col-md-5 xs-margin-30px-bottom">
+                <div class="team-single-img">
+                    <img src=@Model.Img_Url alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-7">
+                <div class="team-single-text padding-50px-left sm-no-padding-left">
+                <h4 class="font-size38 sm-font-size32 xs-font-size30">@Model.FirstName @Model.LastName</h4>
+                    <div class="contact-info-section margin-40px-tb">
+                        <ul class="list-style9 no-margin">
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <strong class="margin-10px-left text-orange">Username:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                    <p>@Model.UserName</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <strong class="margin-10px-left text-yellow">Age:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@ViewBag.Age</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <strong class="margin-10px-left text-lightred">Gender:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Model.Gender</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <strong class="margin-10px-left text-green">Country:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Model.address.Country</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <strong class="margin-10px-left xs-margin-four-left text-purple">Phone:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p>@Model.PhoneNumber</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-5 col-5">
+                                        <strong class="margin-10px-left xs-margin-four-left text-pink">Email:</strong>
+                                    </div>
+                                    <div class="col-md-7 col-7">
+                                        <p><a href="javascript:void(0)">@Model.Email</a></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+            </div>
+        </div>
+    </div>
+</div>

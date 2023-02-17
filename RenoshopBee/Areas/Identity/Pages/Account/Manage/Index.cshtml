@@ -9,12 +9,30 @@
 <partial name="_StatusMessage" for="StatusMessage" />
 <div class="row">
     <div class="col-md-6">
+
         <form id="profile-form" method="post">
+            <input hidden asp-for="Input.Img_Url"/>
+            <input asp-for="Input.address.City" hidden/>
+            <input asp-for="Input.address.Country" hidden/>
+            <input asp-for="Input.address.Street" hidden/>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
-                <input asp-for="Username" class="form-control" disabled />
-                <label asp-for="Username" class="form-label"></label>
+                <input asp-for="Input.UserName" class="form-control" disabled />
+                <label asp-for="Input.UserName" class="form-label"></label>
             </div>
+
+            <div class="form-floating">
+                <input asp-for="Input.FirstName" class="form-control" />
+                <label asp-for="Input.FirstName" class="form-label"></label>
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating">
+                <input asp-for="Input.LastName" class="form-control" />
+                <label asp-for="Input.LastName" class="form-label"></label>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+
             <div class="form-floating">
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <label asp-for="Input.PhoneNumber" class="form-label"></label>
