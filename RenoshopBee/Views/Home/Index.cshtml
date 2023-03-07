@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RenoshopBee.Models.Product>
+﻿@model RenoshopBee.ViewModels.HomeViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -7,12 +7,12 @@
     <div class="container d-flex h-100 justify-content-flex-start align-items-center">
         <div class="landing-text w-50 text-center text-md-start">
             <h2 class="fw-bold text-secondary text-uppercase fs-1">
-                The best <span class="d-block text-primary">Woocommerce</span>
+                The best <span class="d-block text-primary">Fashion Ecommerce</span>
             </h2>
             <p class="text-white-50">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa illum
-                provident, mollitia distinctio
-                quod saepe ipsum modi ad iusto numquam.
+               This is the best Fashion Ecommerce
+                For Clothes, jewelries and Accessories
+                Hope You Enjoy our Website
             </p>
             <button class="btn btn-primary text-uppercase py-2 px-3">Buy now</button>
         </div>
@@ -31,34 +31,30 @@
             </p>
         </div>
         <div class="row col-lg-9">
-            @foreach (var item in Model)
+            @foreach (var item in Model.products)
             {
                     <a asp-controller="Products" style="text-decoration:none;color:black;" asp-action="Details" asp-route-id=@item.ID class="product-card col-md-6 col-lg-4">
                     <div class="product-img">
                         <img class="img-fluid" src="@item.Img_url" alt="product">
                         <div class="product-buttons">
-                            <div class="add-to-cart">
-                                <i class="fas fa-shopping-cart"></i>
-                            </div>
-                            <div class="add-to-wishlist">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <div class="return-product">
-                                <i class="fas fa-retweet"></i>
-                            </div>
+                            <form method="post">
+                                <button asp-action="AddToCart" asp-route-id="@item.ID" type="submit" class="add-to-cart">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                     <div class="product-name text-capitalize pt-2">
                         @item.Name
                     </div>
                     <div class="product-price mb-2">@item.Price</div>
-                    <div class="product-rating">
+                  <!--  <div class="product-rating">
                         <i class="fas fas fa-star filled"></i>
                         <i class="fas fas fa-star filled"></i>
                         <i class="fas fas fa-star filled"></i>
                         <i class="fas fas fa-star filled"></i>
                         <i class="fas far fa-star unfilled"></i>
-                    </div>
+                      </div>-->
                 </a>
             }
         </div>
@@ -124,35 +120,33 @@
         <span class="text-primary">Newest trends from top brands</span>
     </div>
     <div class="row py-5">
-        @foreach (var product in Model)
+        @foreach (var product in Model.products)
         {
             <a asp-controller="Products" style="text-decoration:none;color:black;" asp-action="Details" asp-route-id=@product.ID class="product-card col-md-6 col-lg-3">
+           
             <div class="product-img">
                 <img class="img-fluid" src=@product.Img_url alt="product">
                 <div class="product-buttons">
-                    <div class="add-to-cart">
+                        <form method="post" >
+                            <button asp-action="AddToCart" asp-route-id="@product.ID" type="submit" class="add-to-cart">
                         <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="add-to-wishlist">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <div class="return-product">
-                        <i class="fas fa-retweet"></i>
-                    </div>
+                    </button>
+                    </form>
                 </div>
             </div>
             <div class="product-name text-capitalize pt-2">
                 @product.Name
             </div>
             <div class="product-price mb-2">@product.Price</div>
-            <div class="product-rating">
+     <!--       <div class="product-rating">
                 <i class="fas fas fa-star filled"></i>
                 <i class="fas fas fa-star filled"></i>
                 <i class="fas fas fa-star filled"></i>
                 <i class="fas fas fa-star filled"></i>
                 <i class="fas far fa-star unfilled"></i>
             </div>
-        </a>
+                           -->
+            </a>
         }
     </div>
 </section>

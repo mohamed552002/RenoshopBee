@@ -102,8 +102,8 @@
                 <input asp-for="NumOfSales" class="border rounded bg-light py-1 mb-md-3 col-8 col-md-2" id="in-stock">
                 <span asp-validation-for="NumOfSales"></span>
                 <label class="p-0" for="p-c">Category</label>
-                <select asp-for="Category" class="border bg-light px-3 py-2 col-md-2 mb-3 rounded text-black-50" 
-                        id="p-c">
+                <select asp-for="Category" class="category border bg-light px-3 py-2 col-md-2 mb-3 rounded text-black-50"
+                        id="p-c" onchange="categoryChoose()">
                     <option disabled selected>Select..</option>
                     <option value="Women">Women</option>
                     <option value="Men">Men</option>
@@ -112,6 +112,16 @@
                     <option value="Accssories">Accssories</option>
                 </select>
                 <span asp-validation-for="Category"></span>
+
+                <select asp-for="availableSizes" name="sizes" id="Size"  multiple class="size ">
+                    <option value="Samll">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                    <option value="Xlarge">Xlarge</option>
+                    <option value="XXlarge">XXlarge</option>
+                    <option value="3XLarge">3XLarge</option>
+                </select>
+                <label class="size" for="Size">Size</label>
                 <label class="p-0" for="p-p">Price</label>
                 <input asp-for="Price" class="border rounded bg-light py-1 mb-md-3 col-8 col-md-2" 
                        placeholder="Type here" id="p-p">

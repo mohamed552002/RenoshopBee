@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" />
-    <title>@ViewData["Title"] - SchoolSystem</title>
+    <title>RenoshopBee | @ViewData["Title"]</title>
+    <link rel="icon" href="~/imgs/reno.png">
     <link rel="stylesheet" href="~/Sass/all.min.css">
     <link rel="stylesheet" href="~/Sass/scss/bootstrap.css">
     <link rel="stylesheet" href="~/Sass/style.css">
-    <title>RenoshopBee | Home</title>
 </head>
 <body>
 
@@ -19,10 +19,11 @@
             @RenderBody()
         </main>
 
-
     <script src="~/js/all.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/Sign-up.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

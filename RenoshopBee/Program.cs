@@ -6,18 +6,21 @@ using Microsoft.Extensions.DependencyInjection;
 using RenoshopBee.Data;
 using RenoshopBee.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using RenoshopBee.Services;
+using RenoshopBee.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
-options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString1")));
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString3")));
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(option => option.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI()
     .AddDefaultTokenProviders();
-
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddTransient<ICartMethods, CartMethod>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {
     options.Cookie.Name = "RememberMe";
@@ -26,6 +29,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     //options.AccessDeniedPath = "AccessDenied";
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
 });
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -42,7 +46,7 @@ app.UseStaticFiles();
 app.UseCookiePolicy();
 app.UseRouting();
 app.UseAuthentication();;
-
+app.UseSession();
 app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllerRoute(

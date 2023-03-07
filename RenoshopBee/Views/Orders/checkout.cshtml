@@ -1,0 +1,210 @@
+@model RenoshopBee.ViewModels.CheckoutViewModel
+@{
+    ViewData["Title"] = "chekout";
+}
+<section class="checkout container">
+        <!--breadcrumb componant-->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb py-5">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="cart.html">Cart</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+            </ol>
+        </nav>
+        <!--breadcrumb componant-->
+        <div class="checkout-content row py-5 mx-lg-5">
+            <div class="calcuation px-3 p-0 mb-5 row m-0">
+                <div class="border my-4 p-0">
+                    <h5 class="text-uppercase text-center text-md-start px-md-5 py-4 m-0 text-black-50">Your order</h5>
+                    <div class="header d-flex justify-content-between border-bottom mx-2 mx-md-5 py-2">
+                        <div class="product">
+                            Product
+                        </div>
+                        <div class="total">
+                            Total
+                        </div>
+                    </div>
+                    <div class="products mx-2 mx-md-5 py-4 border-bottom ">
+                        @foreach (var item in Model.order.orderItems)
+                    {
+                        <div class="product d-flex justify-content-between align-items-center gap-1 py-2">
+                            <div class="product-name">
+                                @item.product.Name
+                                <span class="q">
+                                    x <span class="quantity">@item.Quantity</span>
+                                </span>
+                            </div>
+                            <div class="total">
+                                $@item.TotalPrice
+                            </div>
+                        </div>
+                        }
+                    </div>
+                    <div class="subtotal mx-2 mx-md-5 py-4 border-bottom ">
+                        <div class="subtotal d-flex justify-content-between py-2">
+                            <p class="m-0">Subtotal</p>
+                            <span class="subTotal">$@Model.order.SubTotalPrice</span>
+                        </div>
+                        <div class="shipping d-flex justify-content-between py-2">
+                            <p class="m-0">Shipping</p>
+                            <span class="shippingCost">Free Shipping</span>
+                        </div>
+                    </div>
+                    <div class="total px-2 px-md-5 py-4 border-bottom">
+                        <div class="total fw-bold d-flex justify-content-between py-2">
+                            <p class="m-0">Total</p>
+                            <span class="total">$@Model.order.TotalPrice</span>
+                        </div>
+                    </div>
+                    <div class="payment-method-selection mx-2 mx-md-5 py-4  ">
+                        <div class="paypal d-flex gap-2 align-items-center py-2">
+                            <input onchange="onlyOne(this)" type="checkbox" name="paypal" id="paypal" value="Paypal">
+                            <label for="paypal">Paypal</label>
+                        </div>
+                        <div class="mastercard d-flex gap-2 align-items-center py-2">
+                            <input onchange="onlyOne(this)" type="checkbox" name="mastercard" id="mastercard">
+                            <label for="mastercard">Mastercard</label>
+                        </div>
+                        <div class="visa d-flex gap-2 align-items-center py-2">
+                            <input onchange="onlyOne(this)" type="checkbox" name="visa" id="visa">
+                            <label for="visa">Visa</label>
+                        </div>
+                        <div class="COD d-flex gap-2 align-items-center py-2">
+                        <input onchange="onlyOne(this)" type="checkbox" name="COD" id="COD" value="Cash on delivery">
+                            <label for="COD">Cash on delivery</label>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="window.location.assign(`checkout.html`)"
+                    class="place-order btn btn-primary text-uppercase text-white rounded-0 col-md-5 ms-auto">Place
+                    Order</button>
+            </div>
+        </div>
+        <div class="orderConfirmation d-none">
+            <div class="alert alert-success d-flex justify-content-start flex-column my-5 py-5 border-0 rounded-0"
+                role="alert">
+                <h4 class="alert-heading">
+                    <i class="fas fa-check-circle"></i> your order has been confirmed successfully!
+                </h4>
+                <p>we have just received your order and we will prepare it as soon as posible. you can track your order
+                    anytime by clicking on the button bellow.</p>
+                <p>thanks for trusting us!</p>
+                <hr>
+                <button onclick="currentLocation()" class="btn btn-outline-primary col-lg-4 align-self-center">Order
+                    Tracking</button>
+                <div class="order-current-location d-none align-items-center justify-content-center my-3">
+                    <iframe class="mw-100"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d912.2717168788863!2d31.313034785070965!3d30.069001277505386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583f42f1fb440f%3A0x1b4fe8f0e1b0d77e!2z2KrZhdin2LMg2YTZhNmF2LnZhNmI2YQ!5e0!3m2!1sar!2seg!4v1670179736124!5m2!1sar!2seg"
+                        width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+</section>
+    <!--End checkout-content-->
+    <div class="modal fade" id="PaymentMethodModalToggle" aria-hidden="true" data-bs-backdrop="static"
+        aria-labelledby="PaymentMethodModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="PaymentMethodModalToggleLabel">Payment Step</h1>
+                </div>
+                <form class="row" asp-action="OrderComplete">
+                    <input hidden asp-for="credit.UserId" value="@User" />
+                <div class="modal-body">
+                        <div class="cardNumber mb-3 col-md-6 d-flex flex-column">
+                            <label class="text-black" for="cardNumber">Card number</label>
+                            <input asp-for=@Model.credit.CardNumber  maxlength="12" class="border rounded p-2  bg-light w-100">
+                            <img class="credit-cart-type" src="imgs/credit-card.png" alt="" srcset="">
+                        </div>
+                        <div class="expiryDate mb-3 col-md-6 d-flex flex-column">
+                            <label class="text-black expiryDate" for="expiryDate">Expiry date</label>
+                            <input asp-for=@Model.credit.ExpireDate id="expiryDate" class="border rounded p-2  bg-light w-100"  required>
+                            <span asp-validation-for="@Model.credit.ExpireDate"></span>
+                        </div>
+                        <div class="CVC mb-3 col-md-6 d-flex flex-column">
+                            <label class="text-black CVC" for="CVC">CCV</label>
+                        <input asp-for=@Model.credit.CCV id="CVC" class="border rounded p-2  bg-light w-100" type="text" maxlength="3"
+                                required>
+                            <img src="imgs/cvc.png" alt="" srcset="">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                    <input type="submit" class="btn btn-primary" data-bs-dismiss="modal" value="Pay"/>
+                       
+                </div>
+                    </form>
+
+            </div>
+        </div>
+    </div>
+    @section Scripts{
+    <script>
+        let COD = document.querySelectorAll(`input[type = "checkbox"]`)[3];
+        function onlyOne(checkbox) {
+            let checkboxs = document.querySelectorAll(`input[type = "checkbox"]`);
+            checkboxs.forEach((item) => {
+                if (item != checkbox) {
+                    item.checked = false;
+                }
+                if (COD.checked == true) {
+                    document.querySelector("span.shippingCost").textContent = "$25";
+                    document.querySelector("span.total").textContent = "$349";
+                }
+                else {
+                    document.querySelector("span.shippingCost").textContent = "Free Shipping";
+                    document.querySelector("span.total").textContent = "$327";
+                }
+            })
+        }
+        //open modal
+        let paymentModal = document.querySelector("#PaymentMethodModalToggle");
+        let button = document.querySelector("button.place-order");
+        button.onclick = function () {
+            if (COD.checked == false) {
+                let modal = new bootstrap.Modal(paymentModal);
+                modal.show();
+            }
+            else {
+                showOrderConfirmation();
+            }
+        }
+        // credit card validation
+        let creditCard = document.querySelector("input#cardNumber");
+        let cardImg = document.querySelector("img.credit-cart-type");
+        creditCard.oninput = function () {
+            creditCard.onkeydown = function (e) {
+                if (e.keyCode == 8) {
+                    creditCard.value.length--;
+                }
+                else {
+                    if (creditCard.value.length == 4 || creditCard.value.length == 9 || creditCard.value.length == 14) {
+                        creditCard.value = creditCard.value + " ";
+                    }
+                }
+                if (/(^(34)|^(37))/.test(creditCard.value)) {
+                    cardImg.src = "imgs/american-express.png";
+                } else if (/^(4)/.test(creditCard.value)) {
+                    cardImg.src = "imgs/visa.png";
+                } else if (/^(5)/.test(creditCard.value)) {
+                    cardImg.src = "imgs/master-card.png";
+                }
+                else {
+                    cardImg.src = "imgs/credit-card.png";
+                }
+            }
+        }
+        //order confirmation page
+        function showOrderConfirmation() {
+            document.querySelector(".checkout-content").classList.add("d-none");
+            document.querySelector(".orderConfirmation").classList.remove("d-none");
+        }
+        //show order-current-location
+        function currentLocation() {
+            document.querySelector(".order-current-location").classList.remove("d-none");
+            document.querySelector(".order-current-location").classList.add("d-flex");
+        }
+    </script>
+    }
+    

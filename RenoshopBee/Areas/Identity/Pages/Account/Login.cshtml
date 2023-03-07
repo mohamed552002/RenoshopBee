@@ -51,7 +51,7 @@
                             <input asp-for="Input.RememberMe" id="remember" type="checkbox">
                             <label for="remember">Remember Me</label>
                         </div>
-                        <a class="text-decoration-none" href="#">Recovery Password</a>
+                        <a class="text-decoration-none" asp-area="Identity" asp-page="ForgotPassword">Recovery Password</a>
                     </div>
                     <input type="submit" class="btn btn-primary py-2 text-white" value="Login">
                     <span class="separator text-center py-3">or</span>

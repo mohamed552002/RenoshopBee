@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_LayoutResource.cshtml";
 }
 
+
 <div class="sign-up-body row m-0">
 
 
@@ -31,88 +32,78 @@
             </div>
             <div class="form-content px-3 px-md-5 d-flex flex-column">
                 <form asp-route-returnUrl="@Model.ReturnUrl" enctype="multipart/form-data" class="sign-up-body row m-0" >
+                    <div asp-validation-summary="ModelOnly"></div>
                 <div class="name mb-3 col-md-6 d-flex flex-column">
-                    <label class="text-black fname" for="fname">User Name</label>
-                    <input asp-for="Input.UserName" id="fname" class="border rounded p-2  bg-light w-100" type="text" maxlength="20" required
-                           placeholder="John">
-                    <span asp-validation-for="Input.UserName"></span>
+                    <label class="text-black uname" for="uname">User Name</label>
+                    <input asp-for="Input.UserName" id="uname" class="border rounded p-2  bg-light w-100" type="text" maxlength="20" required>
+                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
                 </div>
 
                 <div class="name mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black fname" for="fname">First Name</label>
                     <input asp-for="Input.FirstName" id="fname" class="border rounded p-2  bg-light w-100" type="text" maxlength="20" required
-                           placeholder="John">
-                    <span asp-validation-for="Input.FirstName"></span>
+                           >
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                 </div>
                 <div class="name mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black lname" for="lname">Last Name</label>
                     <input asp-for="Input.LastName" id="lname" class="border rounded p-2  bg-light w-100" type="text" maxlength="20" required
-                           placeholder="Doe">
-                    <span asp-validation-for="Input.LastName"></span>
+                           >
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
 
                 </div>
                 <div class="pnumber mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black pnumber" for="pnumber">Phone Number</label>
-                    <input asp-for="Input.PhoneNumber" class="border rounded p-2  bg-light w-100" type="tel" maxlength="15"
-                           required placeholder="(+20)0123456789">
-                    <span asp-validation-for="Input.PhoneNumber"></span>
+                    <input asp-for="Input.PhoneNumber" class="border rounded p-2  bg-light w-100" type="tel" maxlength="11"
+                           required  >
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                 </div>
                 <div class="bdate mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black bdate" for="bdate">birth Date</label>
                     <input asp-for="Input.BirthDate" id="bdate" class="border rounded p-2  bg-light w-100" type="date" required>
-                </div>
-                <div class="input role mb-3 col-md-6 d-flex flex-column">
-                    <label class="text-black role" for="role">I'm here as a</label>
-                    <select asp-for="Input.Role" class="border rounded p-2  bg-light w-100" id="role">
-                        <option value="Customer">Customer</option>
-                        <option value="Seller">Seller</option>
-                    </select>
-                    <span asp-validation-for="Input.Role"></span>
+                    <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
                 </div>
                                 <div class="address mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black address" for="address">Country</label>
-                    <input asp-for="Input.address.Country" id="address" class="border rounded p-2  bg-light w-100" type="text" placeholder="Egypt"
-                           required>
-                    <span asp-validation-for="Input.address.Country"></span>
+                    <input asp-for="Input.address.Country" id="address" class="border rounded p-2  bg-light w-100" type="text" required>
+                    <span asp-validation-for="Input.address.Country" class="text-danger"></span>
                 </div>
                 <div class="address mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black address" for="address">City</label>
-                    <input asp-for="Input.address.City" id="address" class="border rounded p-2  bg-light w-100" type="text" placeholder="Giza"
-                           required>
-                    <span asp-validation-for="Input.address.City"></span>
+                    <input asp-for="Input.address.City" id="address" class="border rounded p-2  bg-light w-100" type="text" required>
+                    <span asp-validation-for="Input.address.City" class="text-danger"></span>
                 </div>
                 <div class="address mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black address" for="address">Street</label>
-                    <input asp-for="Input.address.Street" id="address" class="border rounded p-2  bg-light w-100" type="text" placeholder="20 elyad st."
-                           required>
-                    <span asp-validation-for="Input.address.Street"></span>
+                    <input asp-for="Input.address.Street" id="address" class="border rounded p-2  bg-light w-100" type="text" required>
+                    <span asp-validation-for="Input.address.Street" class="text-danger"></span>
                 </div>
                 <div class="input email mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black email" for="email">Email</label>
-                    <input asp-for="Input.Email" id="email" class="border rounded p-2  bg-light w-100 important" type="email" required
-                           placeholder="aaaa@hotmail.com">
-                    <span asp-validation-for="Input.Email"></span>
+                    <input asp-for="Input.Email" id="email" class="border rounded p-2  bg-light w-100 important" type="email" required>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
 
                 <div class="input password mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black password" for="email">Password</label>
                     <input asp-for="Input.Password" id="password" class="border rounded p-2  bg-light w-100 important" type="password"
-                           required placeholder="Password">
-                    <span asp-validation-for="Input.Password"></span>
+                           required >
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div class="input password mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black password" for="email">Password Confirmation</label>
                     <input asp-for="Input.ConfirmPassword" id="passwordConfirmation" class="border rounded p-2  bg-light w-100 important" type="password"
-                           required placeholder="Password Confirmation">
-                    <span asp-validation-for="Input.ConfirmPassword"></span>
+                           required >
+                    <span asp-validation-for="Input.ConfirmPassword" calss="text-danger" ></span>
                 </div>
                 <div class=" mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black " for="email"> Gender</label>
-                    <select class="border rounded p-2  bg-light w-100">
+                    <select asp-for="Input.Gender" class="border rounded p-2  bg-light w-100">
                         <option selected disabled>Gender</option>
                         <option>M</option>
                         <option>F</option>
                     </select>
+                    <span asp-validation-for="Input.Gender" class="text-danger"></span>
                 </div>
                 <div class="check-pass row mt-3 mb-5 border rounded py-4 bg-light col-md-10 mx-auto">
                     <span class="lowercase col-lg-6 mb-2">
@@ -140,9 +131,11 @@
                     </div>
                 </div>
                 <input type="button" class="btn btn-primary py-2 text-white  col-lg-3 ms-lg-2" data-bs-target="#prfilePicModalToggle"
-                           value="Next" data-bs-toggle="modal"
+                           value="Next" data-bs-toggle="modal" onclick="return trnsfer()"
                        value="Create Account">
-                <div class="modal fade" id="prfilePicModalToggle" aria-hidden="true" data-bs-backdrop="static"
+
+
+                <div class="modal fade" id="prfilePicModalToggle" aria-hidden="false" data-bs-backdrop="static"
                      aria-labelledby="prfilePicModalToggleLabel" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -171,6 +164,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </form>
                 <span class="text-start mt-4">
                     Already have an account? <a href="login.html"
@@ -240,6 +235,19 @@
         </p>
     </div>
 </div>
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function trnsfer(){
+            var firstName = document.getElementById("fname").value;
+            var lastName = document.getElementById("lname").value;
+            document.querySelector('.fName').innerHTML = firstName
+            document.querySelector('.lName').innerHTML = lastName;
+        }
+    </script>
+}
 
 
 

@@ -46,19 +46,6 @@ darkModeBtn.onclick = function(){
     darkModeBtn.classList.toggle("toggle");
 }
 
-//opening product details
-let productsImgs = document.querySelectorAll(".product-card .product-img");
-let productsNames = document.querySelectorAll(".product-card .product-name");
-productsImgs.forEach((product)=>{
-    product.onclick = function(){
-        window.location.assign("product-details.html");
-    }
-})
-productsNames.forEach((product)=>{
-    product.onclick = function(){
-        window.location.assign("product-details.html");
-    }
-})
 
 //scroll to top button
 let stpBtn = document.createElement("button");
@@ -84,4 +71,17 @@ window.onscroll = function(){
 let sectionSorting = document.querySelector(".filter"); 
 sectionSorting.onclick = function () {
     document.querySelector(".section-sort").classList.toggle("show");
+}
+
+function categoryChoose() {
+    var categoryValue = document.querySelector('.category').value;
+
+    if ((categoryValue == 'Men' || categoryValue == 'Women' || categoryValue == 'Kids')) {
+        if (!(document.querySelector('.size').className.endsWith('show'))) {
+            document.querySelector('.size').classList.toggle('show');
+        }
+    }
+    else {
+        document.querySelector('.size').classList.remove('show');
+    }
 }

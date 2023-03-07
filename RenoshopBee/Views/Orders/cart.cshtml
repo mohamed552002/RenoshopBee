@@ -1,0 +1,194 @@
+﻿@model RenoshopBee.Models.Cart
+@{
+    ViewData["Title"] = "Cart";
+}
+<!--Start cart-->
+<section class="cart container">
+    <!--breadcrumb componant-->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb py-5">
+            <li class="breadcrumb-item"><a asp-controller="Home">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cart</li>
+        </ol>
+    </nav>
+    <!--breadcrumb componant-->
+    @if (Model != null)
+    {
+        <form method="post" asp-action="Checkout">
+            <table class="row table table-bordered table-hover m-0">
+        <thead class=" p-0">
+            <tr class="m-0  row align-items-center justify-content-center">
+                <th class="py-4 col-4  text-center">Products</th>
+                <th class="py-4 col-2 d-none d-md-block text-center">Color/size</th>
+                <th class="py-4 col-4 col-md-2 text-center">Quantity</th>
+                <th class="p-4 col-2 d-none d-md-block text-center">Price</th>
+                <th class="p-4 col-4 col-md-2 text-center">Total</th>
+            </tr>
+        </thead>
+        <tbody class="p-0">
+
+
+            @for (int i = 0; i < Model.products.Count; i++)
+            {
+                <tr class="m-0 row  justify-content-center">
+                    <td class="d-flex col-4 align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div class="img w-50 d-none d-md-block">
+                                <img class="img-fluid" src=@Model.products[i].Img_url alt="">
+                            </div>
+                            @Model.products[i].Name
+                        </div>
+                    </td>
+                    <td class="py-4 col-2 d-none d-md-flex align-items-center justify-content-center text-center">
+                        <div class="d-flex flex-column align-items-center">
+                                    @if (Model.products[i].availableSizes!=null){
+                            <select name="items[@i].Size">
+                                <option disabled selected>Size:</option>
+                                @foreach(var size in Model.products[i].availableSizes){
+                                            <option>@size.Size</option>
+                                }
+                            </select>
+                                    }
+                            <select class="mt-1" name="items[@i].Color">
+                                <option disabled selected>Color:</option>
+                                <option>Black</option>
+                                <option>White</option>
+                                <option>Gray</option>
+                                <option>Red</option>
+                                <option>Yellow</option>
+                                <option>Blue</option>
+                            </select>
+                        </div>
+                    </td>
+                    <td class="p-4 col-4 col-md-2 d-flex align-items-center justify-content-center text-center">
+                        <div class="holder p-3">
+                            <div class="q border p-2 d-flex justify-content-center align-items-center quantity">
+                                <input name="items[@i].Quantity" class="quant@($"{i}")"  id="quant" style="all: unset;width: 25px;" type="number" value="1" onchange="change(@i)" 
+                            onkeydown="return false" min="1">
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4 col-2 d-none d-md-flex justify-content-center align-items-center text-center price@($"{i}")">
+                        <div class="">@Model.products[i].Price</div>
+
+                    </td>
+                    <td class="p-4 col-4 col-md-2 d-flex justify-content-center align-items-center text-center ">
+                        <div class="d-flex justify-content-around align-items-center gap-4 gap-lg-5" >
+                            <p name="items[@i].TotalPrice" class="total-price@($"{i}")" >@Model.products[i].Price</p>
+                            <button style="all:unset;" asp-controller="Cart" asp-action="DeletefromCart" asp-route-id="@Model.products[i].ID"><i class="fas fa-window-close text-danger"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                <input hidden name="items[@i].ProductId" value="@Model.products[@i].ID" />
+            }
+        </tbody>
+        <tfoot class="p-0">
+            <tr class="m-0 row  justify-content-center">
+                <td class="d-flex justify-content-center" colspan="5">
+                    <a asp-controller="Home" asp-action="Index"
+                            class=" btn btn-primary text-light text-uppercase rounded-0 px-3 ms-md-auto me-md-3 my-3">
+                        Continue
+                        Shopping
+                    </a>
+                            <button class=" btn btn-primary text-light text-uppercase rounded-0 px-3 ms-md-auto me-md-3 my-3">
+                                Proceed to checkout
+                                </button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    </form>
+    }
+    else
+    {
+        <h1>There is Nothing in Your cart</h1>
+        <a asp-controller="Home" asp-action="Index">
+        <button class=" btn btn-primary text-light text-uppercase rounded-0 px-3 ms-md-auto me-md-3 my-3">
+            Go
+            Shopping
+        </button>
+        </a>
+    }
+    <!--<div class="other-inputs row py-5">
+        <div class="coupon-code col-md-6 px-3 p-0 mb-5">
+            <h5 class="text-uppercase">Use coupon code</h5>
+            <p class="text-black-50 text-capitalize mb-1">enter your coupon here</p>
+            <div class="coupon-input row m-0">
+                <input id="couponCode" class="border p-2 col-9 bg-light" type="text" maxlength="10"
+                       placeholder="Enter your coupon here">
+                <button class="btn btn-primary text-uppercase col-3 text-white rounded-0">apply</button>
+            </div>
+        </div>
+        <div class="voucher-code col-md-6 px-3 p-0 mb-5">
+            <h5 class="text-uppercase">Use gift voucher</h5>
+            <p class="text-black-50 text-capitalize mb-1">enter your gift voucher code here</p>
+            <div class="voucher-input row m-0">
+                <input id="voucherCode" class="border p-2 col-9 bg-light" type="text" maxlength="10"
+                       placeholder="Enter gift voucher here">
+                <button class="btn btn-primary text-uppercase col-3 text-white rounded-0">apply</button>
+            </div>
+        </div>
+        <div class="Shipping col-md-6 px-3 p-0 mb-5">
+            <h5 class="text-uppercase">Shipping availability</h5>
+            <div class="Shipping-input row m-0">
+                <label class="px-0 py-2 text-secondary" for="Country">Select Country</label>
+                <select id="Country" class="form-select form-select-md rounded-0" name="Country" id="Country">
+                    <option value="EGY">Egypt</option>
+                    <option value="KSA">Saudi Arabia</option>
+                </select>
+                <label class="px-0 py-2 text-secondary" for="State">State</label>
+                <input id="State" class="border p-2 bg-light" type="text" maxlength="15"
+                       placeholder="Enter your State here">
+                <label class="px-0 py-2 text-secondary" for="PCode">Postal Code</label>
+                <input id="PCode" class="border p-2 bg-light" type="text" maxlength="8"
+                       placeholder="Enter your Postal Code here">
+                <button class=" btn btn-white text-black text-uppercase border col-md-5 rounded-0 px-3 me-auto my-3">
+                    Update
+                    Totals
+                </button>
+            </div>
+        </div>
+        <div class="calcuation col-md-6 px-3 p-0 mb-5 row m-0">
+            <h5 class="text-uppercase p-0">Shopping cart calcuation</h5>
+            <table class="table border my-4">
+                <tbody>
+                    <tr>
+                        <td class="ps-5 p-4 border-0">Subtotal</td>
+                        <td class="text-end pe-5 p-4 border-0">$450</td>
+                    </tr>
+                    <tr>
+                        <td class="ps-5 p-4 border-0">Coupon</td>
+                        <td class="text-end pe-5 p-4 border-0">-$50</td>
+                    </tr>
+                    <tr>
+                        <td class="ps-5 p-4 border-0">Shipping</td>
+                        <td class="text-end pe-5 p-4 border-0">Free Shipping</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="border-top">
+                        <td class="ps-5 p-4">Total</td>
+                        <td class="text-end pe-5 p-4">$400</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button class="btn btn-primary text-uppercase text-white rounded-0 col-md-5 ms-auto">
+                Proceed to
+                checkout
+            </button>
+        </div>
+    </div>-->
+</section>
+@section Scripts{
+        <script>
+        function change(i){
+            var price = ( document.querySelector(`.price${i} div`).textContent);
+            var quantity = document.querySelector(`.quant${i}`).value;
+            console.log(price, quantity);
+            var totalPrice =parseFloat(price) * parseInt(quantity);
+            document.querySelector(`.total-price${i}`).textContent =`${totalPrice}`;
+        }
+        
+    </script>
+}
+<!--End cart-->

@@ -96,22 +96,30 @@ header nav.navbar #collapsibleNavId ul.navbar-nav li:not(.active):hover::before,
 }
 
 header nav.navbar .others .card-items, header nav.navbar .others .search-form, header nav.navbar .others .user-info .user-nav {
-  position: absolute;
-  background-color: white;
-  border-radius: 15px;
+    position: absolute;
+    background-color: white;
+    border-radius: 15px;
 }
+    .user-nav a{
+        color:black;
+        text-decoration:none;
+    }
+        .user-nav a:hover {
+            color: var(--main-color);
+            text-decoration: none;
+        }
 
-header nav.navbar .others .card-items::before, header nav.navbar .others .search-form::before, header nav.navbar .others .user-info .user-nav::before {
-  content: "";
-  position: absolute;
-  top: -20px;
-  border: 10px solid;
-  border-top-color: transparent;
-  border-right-color: transparent;
-  border-bottom-color: #ededed;
-  border-left-color: transparent;
-  z-index: 50;
-}
+    header nav.navbar .others .card-items::before, header nav.navbar .others .search-form::before, header nav.navbar .others .user-info .user-nav::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        border: 10px solid;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: #ededed;
+        border-left-color: transparent;
+        z-index: 50;
+    }
 
 section.best-selling .row .product-card, section.featured-products .row .product-card, section.dashboard .products-content .products-grid .product-card,
 section.dashboard .sellers-content .products-grid .product-card, .sellers-requests-grid .request .requested-product .porduct-info, .related-products .products-grid .product-card, section.product-section-grid .products-grid .product-card {
@@ -168,28 +176,29 @@ section.best-selling .row .product-card .product-img .product-buttons, section.f
   transition: 0.3s;
 }
 
-section.best-selling .row .product-card .product-img .product-buttons > div, section.featured-products .row .product-card .product-img .product-buttons > div, section.dashboard .products-content .products-grid .product-card .product-img .product-buttons > div, section.dashboard .sellers-content .products-grid .product-card .product-img .product-buttons > div, .sellers-requests-grid .request .requested-product .porduct-info .product-img .product-buttons > div, .related-products .products-grid .product-card .product-img .product-buttons > div, section.product-section-grid .products-grid .product-card .product-img .product-buttons > div {
-  background-color: var(--main-color);
-  color: white;
-  margin-bottom: 10px;
-  padding: 8px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-  cursor: pointer;
-}
+    section.best-selling .row .product-card .product-img .product-buttons > div, section.featured-products .row .product-card .product-img .product-buttons > div, .add-to-cart, section.dashboard .products-content .products-grid .product-card .product-img .product-buttons > div, section.dashboard .sellers-content .products-grid .product-card .product-img .product-buttons > div, .sellers-requests-grid .request .requested-product .porduct-info .product-img .product-buttons > div, .related-products .products-grid .product-card .product-img .product-buttons > div, section.product-section-grid .products-grid .product-card .product-img .product-buttons > div {
+        background-color: var(--main-color);
+        color: white;
+        margin-bottom: 10px;
+        padding: 8px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        border:0;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+        cursor: pointer;
+    }
 
-section.best-selling .row .product-card .product-img .product-buttons > div:hover, section.featured-products .row .product-card .product-img .product-buttons > div:hover, section.dashboard .products-content .products-grid .product-card .product-img .product-buttons > div:hover, section.dashboard .sellers-content .products-grid .product-card .product-img .product-buttons > div:hover, .sellers-requests-grid .request .requested-product .porduct-info .product-img .product-buttons > div:hover, .related-products .products-grid .product-card .product-img .product-buttons > div:hover, section.product-section-grid .products-grid .product-card .product-img .product-buttons > div:hover {
-  background-color: rgba(var(--main-color), 0.75);
-}
+        section.best-selling .row .product-card .product-img .product-buttons > div:hover, section.featured-products .row .product-card .product-img .product-buttons > div:hover, .product-buttons form .add-to-cart:hover, section.dashboard .products-content .products-grid .product-card .product-img .product-buttons > div:hover, section.dashboard .sellers-content .products-grid .product-card .product-img .product-buttons > div:hover, .sellers-requests-grid .request .requested-product .porduct-info .product-img .product-buttons > div:hover, .related-products .products-grid .product-card .product-img .product-buttons > div:hover, section.product-section-grid .products-grid .product-card .product-img .product-buttons > div:hover {
+            background-color: rgba(var(--main-color), 0.75);
+        }
 
 section.best-selling .row .product-card .product-img:hover .product-buttons, section.featured-products .row .product-card .product-img:hover .product-buttons, section.dashboard .products-content .products-grid .product-card .product-img:hover .product-buttons, section.dashboard .sellers-content .products-grid .product-card .product-img:hover .product-buttons, .sellers-requests-grid .request .requested-product .porduct-info .product-img:hover .product-buttons, .related-products .products-grid .product-card .product-img:hover .product-buttons, section.product-section-grid .products-grid .product-card .product-img:hover .product-buttons {
   right: 10px;
@@ -356,7 +365,6 @@ section.dashboard .products-content .pages .next-btn:hover, section.dashboard .s
 
 *:focus-within {
   outline: 0;
-  border-color: var(--main-color) !important;
 }
 
 header nav.navbar .navbar-toggler:focus {
@@ -413,12 +421,14 @@ header nav.navbar .others .search-bar svg:hover {
 }
 
 header nav.navbar .others .card-items {
-  display: none !important;
-  bottom: -250px;
-  width: 300px;
-  height: 250px;
-  right: -135px;
-  z-index: 50;
+    display: none !important;
+    bottom: -250px;
+    width: 300px;
+    height: 250px;
+    right: -135px;
+    z-index: 50;
+    overflow: auto;
+    justify-content: space-between;
 }
 
 header nav.navbar .others .card-items svg {
@@ -992,7 +1002,10 @@ footer .footer-nav .list-unstyled a:hover {
   -webkit-box-shadow: none !important;
           box-shadow: none !important;
 }
-
+.accordion li a:hover {
+    color: var(--main-color) !important;
+    transition:0.3s;
+}
 section.dashboard nav.dashboard-nav {
   min-height: 275px;
 }
@@ -1558,12 +1571,16 @@ body .user-nav ul li form button {
         color: var(--main-color)
     }
 body {
-    font-size: 16px;
-    color: #6f6f6f;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: 0.8px;
-    margin-top: 20px;
+    margin: 0;
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    color: var(--bs-body-color);
+    text-align: var(--bs-body-text-align);
+    background-color: var(--bs-body-bg);
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .font-size38 {
@@ -1758,7 +1775,7 @@ a.text-pink:hover {
 
 a.text-purple:hover {
     opacity: 0.8;
-    color: #9d60ff
+    color: #9d60ff;
 }
 
 a.text-lightred:hover {
@@ -1811,3 +1828,14 @@ a.text-lightred:hover {
 .bg-lightred {
     background-color: #ff5722
 }
+header .card-items {
+    display: flex !important;
+    justify-content: space-between;
+}
+.size {
+    display: none;
+}
+
+    .size.show {
+        display: block;
+    }

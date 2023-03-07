@@ -1,5 +1,6 @@
 ﻿@inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignManager
+@inject IHttpContextAccessor Accessor
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,11 +9,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" />
-    <title>@ViewData["Title"] - SchoolSystem</title>
+    <link rel="icon" href="~/imgs/reno.png">
+    <title>RenoshopBee | @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/Sass/all.min.css">
     <link rel="stylesheet" href="~/Sass/scss/bootstrap.css">
     <link rel="stylesheet" href="~/Sass/style.css">
-    <title>RenoshopBee | Home</title>
 </head>
 
 <body>
@@ -41,7 +42,7 @@
         <!--Social media && contacts Info-->
         <nav class="navbar navbar-expand-sm navbar-light bg-light">
             <div class="container-fluid flex-sm-column flex-xl-row">
-                <a class="navbar-brand text-uppercase" href="#">
+                <a class="navbar-brand text-uppercase" asp-controller="Home" asp-action="Index" >
                     <span class="text-primary fw-bold">RenoShop</span>Bee
                 </a>
                 <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
@@ -52,7 +53,7 @@
                 <div class="collapse navbar-collapse flex-column flex-md-row" id="collapsibleNavId">
                     <ul class="navbar-nav  mt-2 mt-lg-0 order-2 order-md-1">
                         <li class="nav-item active py-3 px-2 px-lg-3">
-                            <a class="nav-link text-uppercase fw-bold" href="#" aria-current="page">Home</a>
+                            <a class="nav-link text-uppercase fw-bold" asp-controller="Home" asp-action="Index" >Home</a>
                         </li>
                         <li class="nav-item py-3 px-2 px-lg-3">
                             <a class="nav-link text-uppercase fw-bold" asp-controller="Products" asp-action="Sections" asp-route-section=Women>Women</a>
@@ -73,10 +74,41 @@
                     <div class="others d-flex gap-3 order-1">
                         <div class="shopping-cart text-black d-flex align-items-center px-2">
                             <i class="fas fa-shopping-cart button"></i>
-                            <div class="card-items d-flex align-items-center justify-content-center flex-column">
-                                <i class="fas fa-exclamation text-primary p-5 pb-2"></i>
-                                <p class="text-capitalize pb-5">your cart is empty</p>
-                                <button class="close btn btn-primary text-white">Continue Shopping</button>
+                            <div class="card-items d-flex  flex-column" style="overflow: auto;">
+                                <table>
+                                @if (Accessor.HttpContext.Session.GetString("_cart") == null)
+                                {
+                                    <i class="fas fa-exclamation  text-primary p-5 pb-2"></i>
+                                        <p class="text-capitalize text-center pb-5">your cart is empty</p>
+                                    }
+                                else
+                                { 
+                                    
+                                    foreach (var item in JsonConvert.DeserializeObject<Cart>(Accessor.HttpContext.Session.GetString("_cart")).products)
+                                    {
+                                        <tr class="mt-1">
+                                            <td ><img style="width:3rem;border:1px solid;border-radius:100%; " src=@item.Img_url /></td>
+                                                <td>@item.Name</td>
+                                                <td>@item.Price</td>
+                                                <td>
+                                                    <form method="post" asp-controller="Cart" asp-action="DeletefromCart" asp-route-id=@item.ID>
+                                                        <button style=" all:unset;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                                                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z" />
+                                                            </svg>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                        </tr>
+                                    }
+                                   
+                                    
+                                }
+                                </table>
+                                @if (Accessor.HttpContext.Session.GetString("_cart") != null)
+                                {
+                                    <a asp-controller="Orders" asp-action="Index"  class="justify-content-end close btn btn-primary text-white">CheckOut</a>
+                                }
                             </div>
                         </div>
                         <div class="search-bar text-black d-flex align-items-center px-2">
@@ -104,14 +136,16 @@
                             <div class="user-nav">
                                 <ul class="list-unstyled">
                                     <li class="p-2 my-2 border-bottom d-flex align-items-center gap-2">
-                                        <a asp-area="Identity" asp-page="/Account/Manage/Index">
+                                        <a asp-action="UserDetails">
                                         <i class="far fa-user-circle text-primary"></i>
                                         View Profile
                                         </a>
                                     </li>
                                     <li class="p-2 my-2 border-bottom d-flex align-items-center gap-2">
+                                        <a asp-area="Identity" asp-page="/Account/Manage/Index">
                                         <i class="fas fa-edit text-primary"></i>
-                                        Edit Settings
+                                        Edit Profile
+                                        </a>
                                     </li>
                                     <li class="p-2 my-2 d-flex align-items-center gap-2">
                                         <i class="fas fa-moon text-primary"></i>
@@ -133,6 +167,7 @@
         </nav>
     </header>
     <div>
+        @ViewData["InCart"]
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -201,7 +236,7 @@
                     <div class="my-account col-md-6 col-lg-3">
                         <h4 class="header text-uppercase pt-5 pb-3">Admin Panel</h4>
                         <ul class="list-unstyled">
-                            <a asp-controller="Products" >
+                            <a asp-controller="Products" asp-action="Index" >
                                 <li class="py-2">Products</li>
                             </a>
                             <a href="">
@@ -235,15 +270,15 @@
                     <ul class="list-unstyled">
                         <a class="d-flex align-items-center gap-2" href="">
                             <i class="fas fa-globe-africa"></i>
-                        <li class="py-2">1234 Giza,Egypt</li>
+                        <li class="py-2">Egypt</li>
                         </a>
                         <a class="d-flex align-items-center gap-2" href="">
                             <i class="fas fa-phone"></i>
-                        <li class="py-2">+1 234 5678 9999</li>
+                        <li class="py-2">01123456789</li>
                         </a>
-                        <a class="d-flex align-items-center gap-2" href="mailto:yousef.helly@gmail.com">
+                        <a class="d-flex align-items-center gap-2" href="mailto:renoshopbee@outlook.com">
                             <i class="far fa-envelope"></i>
-                        <li class="py-2 text-primary">yousef.helly@gmail.com</li>
+                        <li class="py-2 text-primary">renoshopbee@outlook.com</li>
                         </a>
                     </ul>
                 </div>
@@ -264,6 +299,7 @@
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/main.js"></script>
     <script src="~/js/product-details.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
     
 </body>

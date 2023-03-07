@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,17 +18,20 @@ namespace RenoshopBee.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _context;
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _context = context;
+            _context = context;            _webHostEnvironment = webHostEnvironment;
+
         }
 
         /// <summary>
@@ -94,7 +98,7 @@ namespace RenoshopBee.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(IFormFile? ImgFile)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -102,16 +106,39 @@ namespace RenoshopBee.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            if (!ModelState.IsValid)
+            if (ModelState.HasReachedMaxErrors)
             {
                 await LoadAsync(user);
                 return Page();
             }
-            
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            user.FirstName = Input.FirstName;
-            user.LastName = Input.LastName;
-            user.PhoneNumber = Input.PhoneNumber;
+            if (ImgFile != null)
+            {
+                if (user.Img_Url != "\\images\\No_Image.png")
+                {
+                    var OldImg = _webHostEnvironment + user.Img_Url;
+                    if (System.IO.File.Exists(OldImg))
+                    {
+                        System.IO.File.Delete(OldImg);
+                    }
+                }
+                string imgExtension = Path.GetExtension(ImgFile.FileName);
+                Guid imgGuid = Guid.NewGuid();
+                string imgName = imgGuid + imgExtension;
+                string imgUrl = "\\images\\" + imgName;
+                user.Img_Url = imgUrl;
+
+                string imgPath = _webHostEnvironment.WebRootPath + imgUrl;
+                FileStream imgStream = new FileStream(imgPath, FileMode.Create);
+                ImgFile.CopyTo(imgStream);
+                imgStream.Dispose();
+            }
+            else
+            {
+                var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.PhoneNumber = Input.PhoneNumber;
+            }
                 var Result = await _userManager.UpdateAsync(user);
                 //var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!Result.Succeeded)

@@ -37,34 +37,29 @@
         }
             @foreach (var product in Model)
             {
-                <div class="product-card col-md-6 col-lg-3">
-                    <div class="product-img">
-                        <img class="img-fluid" src=@product.Img_url alt="product">
-                        <div class="product-buttons">
-                            <div class="add-to-cart">
+            <a asp-controller="Products" style="text-decoration:none;color:black;" asp-action="Details" asp-route-id=@product.ID class="product-card col-md-6 col-lg-3">
+                <div class="product-img">
+                    <img class="img-fluid" src="@product.Img_url" alt="product">
+                    <div class="product-buttons">
+                        <form method="post">
+                            <button asp-controller="Home" asp-action="AddToCart" asp-route-id="@product.ID" type="submit" class="add-to-cart">
                                 <i class="fas fa-shopping-cart"></i>
-                            </div>
-                            <div class="add-to-wishlist">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <div class="return-product">
-                                <i class="fas fa-retweet"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-name text-capitalize pt-2">
-                        @product.Name
-
-                    </div>
-                    <div class="product-price mb-2">@product.Price</div>
-                    <div class="product-rating">
-                        <i class="fas fas fa-star filled"></i>
-                        <i class="fas fas fa-star filled"></i>
-                        <i class="fas fas fa-star filled"></i>
-                        <i class="fas fas fa-star filled"></i>
-                        <i class="fas far fa-star unfilled"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
+                <div class="product-name text-capitalize pt-2">
+                    @product.Name
+                </div>
+                <div class="product-price mb-2">@product.Price</div>
+                <!--  <div class="product-rating">
+                      <i class="fas fas fa-star filled"></i>
+                      <i class="fas fas fa-star filled"></i>
+                      <i class="fas fas fa-star filled"></i>
+                      <i class="fas fas fa-star filled"></i>
+                      <i class="fas far fa-star unfilled"></i>
+                    </div>-->
+            </a>
             }
         </div>
         <div class="pages mx-5 my-5 d-flex justify-content-center">

@@ -12,60 +12,12 @@
                 Dashboard
             </li>
             <div class="accordion" id="productAccordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header d-flex align-items-center rounded-1" id="headingOne">
-                        <button class="accordion-button bg-light collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <svg class="svg-inline--fa fa-bag-shopping me-3" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bag-shopping" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 96c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24zm200-24c0 13.3-10.7 24-24 24s-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24z"></path></svg><!-- <i class="fas fa-shopping-bag me-3"></i> Font Awesome fontawesome.com -->
-                            Products
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#productAccordion">
-                        <div class="accordion-body p-0">
-                            <ul class="products-list list-unstyled text-black-50 bg-light px-3">
-                                <li class="py-2 ps-2">
-                                    <a class="text-decoration-none text-black-50" href="admin-view-products.html">
-                                        View
-                                        products
-                                    </a>
-                                </li>
-                                <li class="py-2 ps-2">
-                                    <a class="text-decoration-none text-black-50" href="admin-add-product.html">
-                                        Add/Edit
-                                        products
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion" id="Selleraccordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header d-flex align-items-center rounded-1" id="headingOne">
-                        <button class="accordion-button bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            <svg class="svg-inline--fa fa-network-wired me-3" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="network-wired" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M256 64H384v64H256V64zM240 0c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48h48v32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96v32H80c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48H240c26.5 0 48-21.5 48-48V368c0-26.5-21.5-48-48-48H192V288H448v32H400c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48H560c26.5 0 48-21.5 48-48V368c0-26.5-21.5-48-48-48H512V288h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H352V192h48c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H240zM96 448V384H224v64H96zm320-64H544v64H416V384z"></path></svg><!-- <i class="fas fas fa-network-wired me-3"></i> Font Awesome fontawesome.com -->
-                            Sellers
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#Selleraccordion">
-                        <div class="accordion-body p-0">
-                            <ul class="sellers-list list-unstyled text-black-50 bg-light px-3">
-                                <li class="py-2 ps-2 active">
-                                    <a class="text-decoration-none text-primary active" href="#">
-                                        View
-                                        sellers
-                                    </a>
-                                </li>
-                                <li class="py-2 ps-2">
-                                    <a class="text-decoration-none text-black-50" href="admin-seller-requests.html">
-                                        Sellers
-                                        requests
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <li class="px-3 my-1 mx-2 py-2 d-flex align-items-center rounded-1">
+                <a style="text-decoration:none;color:inherit;" asp-action="Index">
+                    <i class="fas fa-shopping-bag me-3"></i>
+                Products
+                </a>
+            </li>
             </div>
         </ul>
     </nav>
@@ -94,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="products-grid row pt-4">
+                <div class="products-grid row pt-4 pl-4">
                 @foreach (var item in Model)
                 {
     
@@ -102,17 +54,6 @@
                         <a asp-action="Details" asp-route-id=@item.ID style="text-decoration:none;">
                         <div class="product-img">
                            <img class="img-fluid" src="@item.Img_url" alt="product">
-                            <div class="product-buttons">
-                                <div class="add-to-cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </div>
-                                <div class="add-to-wishlist">
-                                    <i class="fas fa-heart"></i>
-                                </div>
-                                <div class="return-product">
-                                    <i class="fas fa-retweet"></i>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="product-name text-capitalize pt-2">
@@ -126,7 +67,7 @@
                                 Edit
                             </a>
                             <form  method="post" asp-action="Delete" asp-route-id=@item.ID class="d-inline">
-                                <button  type="submit" onclick="return ConfirmDelete()" class=" text-danger py-2 px-3 border rounded">Delete</button>
+                                <button style="all:unset"  type="submit" onclick="return ConfirmDelete()" class="del text-danger py-2 px-3 border rounded">Delete</button>
                             </form>
                         </div>
                     </div>

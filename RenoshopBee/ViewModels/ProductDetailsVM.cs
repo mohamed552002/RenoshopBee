@@ -2,7 +2,7 @@
 
 namespace RenoshopBee.ViewModels
 {
-    public class ProductDetailsVM
+    public class ProductDetailsVM:BaseViewModel
     {
         public Product product { get; set; }
         public IEnumerable<UsersReviews>? usersReviews { get; set; }

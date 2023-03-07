@@ -43,6 +43,7 @@ namespace RenoshopBee.Models
         [ValidateNever]
         [NotMapped]
         public ICollection<ProductReview> productReview { get; set; }
+        public ICollection<ProductSizes>? availableSizes { get; set; }
 
     }
 }

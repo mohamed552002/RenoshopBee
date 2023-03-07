@@ -19,19 +19,6 @@
             <div class="img d-flex justify-content-center">
                 <img class="img-fluid" src="@Model.product.Img_url" alt="">
             </div>
-            <div class="other-imgs-slider row  border-top border-bottom justify-content-between">
-                <div class="prev-btn col-1  bg-light d-flex align-items-center justify-content-center">
-                    <i class="fas fa-chevron-left"></i>
-                </div>
-                <div class="imgs-preview col-10 row py-3">
-                    <img class="img-fluid col-4" src="imgs/Hooded Shirt2.webp" alt="">
-                    <img class="img-fluid col-4" src="imgs/Hooded Shirt3.jpg" alt="">
-                    <img class="img-fluid col-4" src="imgs/Hooded Shirt4.webp" alt="">
-                </div>
-                <div class="next-btn col-1 bg-primary text-white d-flex align-items-center justify-content-center">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-            </div>
         </div>
         <div class="product-description col-lg-7 my-5 my-lg-0">
             <h3 id="productName"> @Html.DisplayFor(m => m.product.Name)</h3>
@@ -49,8 +36,8 @@
             <div class="description lh-lg my-3 pb-5 border-bottom">
                 @Html.DisplayFor(m => m.product.Description)
             </div>
-            <div class="product-options row mx-1 gap-4">
-                <div class="select-size px-0 col-md-5 border rounded">
+             <div class="product-options row mx-1 gap-4">
+                <!--<div class="select-size px-0 col-md-5 border rounded">
                     <div class="select-header p-3 d-flex justify-content-between align-items-center">
                         <span class="inner-header">Select size</span>
                         <i class="chevronDown fas fa-chevron-down"></i>
@@ -87,20 +74,15 @@
                     <div class="minus col-3 p-0 text-center py-2 border-end fs-5 fw-bold">-</div>
                     <div class="amount col-6 p-0 text-center py-2 fs-6">1</div>
                     <div class="positive col-3 p-0 text-center py-2 border-start fs-5 fw-bold">+</div>
-                </div>
+                 </div>-->
                 <div class="ordering-options p-0">
+                    <form asp-controller="Home" asp-action="AddToCart" asp-route-id="@Model.product.ID">
                     <button id="addToCartBtn"
                             class="btn btn-primary text-white text-uppercase rounded-0 px-2 py-2 mb-2">
                         <i class="fas fa-shopping-cart"></i>
                         add to cart
                     </button>
-
-                    <button id="addToWL" class="btn btn-white border text-uppercase rounded-0 px-3 py-2 mb-2">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <button class="btn btn-white border text-uppercase rounded-0 px-3 py-2 mb-2">
-                        <i class="fas fa-retweet"></i>
-                    </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -118,7 +100,7 @@
                 <button class="nav-link rounded-0 border-0 pe-4" id="Reviews-tab" data-bs-toggle="tab"
                         data-bs-target="#Reviews-tab-pane" type="button" role="tab" aria-controls="Reviews-tab-pane"
                         aria-selected="false">
-                    Reviews(<span id="revNumber">2</span>)
+                    Reviews(<span id="revNumber">@((Model.usersReviews!=null)?Model.usersReviews.Count():0)</span>)
                 </button>
             </li>
         </ul>
@@ -254,14 +236,7 @@
                         @item.Name
 
                     </div>
-                    <div class="product-price mb-2">33</div>
-                    <div class="product-rating">
-                        <i class="fas fas fa-star filled"></i>
-                        <i class="fas fas fa-star filled"></i>
-                        <i class="fas fas fa-star filled"></i>
-                        <i class="fas fas fa-star filled"></i>
-                        <i class="fas far fa-star unfilled"></i>
-                    </div>
+                    <div class="product-price mb-2">@item.Price</div>
                 </a>
             }
 

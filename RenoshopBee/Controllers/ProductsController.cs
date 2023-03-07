@@ -29,7 +29,7 @@ namespace RenoshopBee.Controllers
         {
               return View(await _context.Products.ToListAsync());
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize]
 
 
         // GET: Products/Details/5
@@ -70,7 +70,7 @@ namespace RenoshopBee.Controllers
             return View(productDetalis);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddReview(ProductReview review)
@@ -94,7 +94,7 @@ namespace RenoshopBee.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Name,Price,Description,Seller_Name,Av_in_stock,Category,Created_at,Last_updated_at,Img_url,Is_active,NumOfSales")]
-        Product product,IFormFile? imgFile)
+        Product product,IFormFile? imgFile,List<string>sizes)
         {
             if (ModelState.IsValid)
             {
@@ -117,6 +117,11 @@ namespace RenoshopBee.Controllers
                 }
                 product.Created_at = DateTime.Now;
                 product.Last_updated_at = DateTime.Now;
+                product.availableSizes = new List<ProductSizes>();
+                foreach (var size in sizes)
+                {
+                    product.availableSizes.Add(new ProductSizes { ProductId = product.ID, Size = size });
+                }
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

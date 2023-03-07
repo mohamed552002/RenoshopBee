@@ -27,5 +27,9 @@ namespace RenoshopBee.Data
         public DbSet<Product>Products { get; set; }
         public DbSet<ProductReview>ProductReviews { get; set; }
         public DbSet<Address> Address { get; set; }
+        public DbSet<Order> orders { get; set; }
+        public DbSet<OrderItem> orderItems { get; set; }
+        public DbSet<CreditCard> creditCards { get; set; }
+        public DbSet<ProductSizes> productSizes { get; set; }
     }
 }
