@@ -8,6 +8,10 @@ using RenoshopBee.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using RenoshopBee.Services;
 using RenoshopBee.Interfaces;
+using RenoshopBee.Interfaces.ProductInterfaces;
+using RenoshopBee.Implementation;
+using RenoshopBee.Interfaces.UserInterfaces;
+using RenoshopBee.Implementation.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +25,15 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(option => option.Sig
     .AddDefaultTokenProviders();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddTransient<ICartMethods, CartMethod>();
+builder.Services.AddTransient<IProductSection, ProductSectionService>();
+builder.Services.AddTransient<IProductSizes, ProductSizeServices>();
+builder.Services.AddTransient<IProductImage, ProductImageService>();
+builder.Services.AddTransient<IProductReview, ProductReviewServices>();
+builder.Services.AddTransient<IProductDate, ProductDateServices>();
+builder.Services.AddTransient<IProductContext, ProductContextServices>();
+builder.Services.AddTransient<IProductSortTechnique, SortByModifiedDate>();
+builder.Services.AddTransient<IProductSortTechnique, SortByPrice>();
+builder.Services.AddTransient<IUserContext, UserContextService>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {
     options.Cookie.Name = "RememberMe";

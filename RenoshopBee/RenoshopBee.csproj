@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <None Include="Views\Orders\checkout.cshtml" />
-    <None Include="Views\Products\Sections.cshtml" />
+    <None Include="Views\Section\Sections.cshtml" />
     <None Include="wwwroot\Sass\helpers\_mixins.scss" />
     <None Include="wwwroot\Sass\helpers\_placeholders.scss" />
     <None Include="wwwroot\Sass\page-sections\home-page\_best-selling.scss" />

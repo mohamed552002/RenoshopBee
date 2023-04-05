@@ -191,8 +191,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <textarea asp-for="review.ReviewBody" class="reviewTA col-12 p-2 border rounded me-lg-5"></textarea>
-                            <input asp-for="review.ProductId" hidden value="@Model.product.ID" />
+                                <textarea asp-for="review.ReviewBody" class="reviewTA col-12 p-2 border rounded me-lg-5"></textarea>
+                                <input asp-for="review.ProductId" hidden value="@Model.product.ID" />
                                 <input type="submit" id="newComment" class="btn btn-primary text-white text-uppercase rounded-0 me-5 py-2 col-6 col-lg-3 mt-3"
                                 value="submit"/>
                         </div>
@@ -215,7 +215,7 @@
             </div>
         </div>
         <div class="products-grid row py-5">
-            @foreach (var item in ViewBag.AllProducts)
+            @foreach (var item in Model.products)
             {
                 <a style="text-decoration:none;color:black;" asp-action="Details" asp-route-id=@item.ID class="product-card col-md-6 col-lg-3">
                     <div class="product-img">
