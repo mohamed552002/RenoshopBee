@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using RenoshopBee.Data;
+using RenoshopBee.Interfaces.CartInterfaces;
+using RenoshopBee.Interfaces.OrderInterfaces;
+using RenoshopBee.Interfaces.ProductInterfaces;
 using RenoshopBee.Models;
 using RenoshopBee.ViewModels;
 
@@ -12,68 +14,39 @@ namespace RenoshopBee.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IOrderServices _orderServices;
+        private readonly ICartMethods _cartMethods;
+        private readonly IProductSizes _productSizes;
         public OrdersController(ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IOrderServices orderServices,
+            ICartMethods cartMethods,
+            IProductSizes productSizes)
         {
             _context = context;
             _userManager = userManager;
+            _orderServices = orderServices;
+            _cartMethods = cartMethods;
+            _productSizes = productSizes;
         }
         public async Task<IActionResult> Index()
         {
-            var cart = GetCartItems();
-            if (cart != null)
+            var cart = _cartMethods.GetCart();
+            if (cart != null) 
             {
-                foreach(var product in cart.products) {
-                    product.availableSizes = _context.productSizes.Where(p => p.ProductId == product.ID).ToList();
-                }
+                cart = _productSizes.GetAllCartProductSizes(cart);
                 return View("cart", cart);
             }
             else
                 return View("cart");
         }
-        public Cart GetCartItems()
-        {
-            Cart cart = new Cart();
-            var cartJson = HttpContext.Session.GetString("_cart");
-            if (cartJson != null)
-            {
-                cart = JsonConvert.DeserializeObject<Cart>(cartJson);
-                return cart;
-            }
-            return null;
-        }
-        public IActionResult Checkout(List<OrderItem> items) {
-
+        public async Task<IActionResult> Checkout(List<OrderItem> items) {
+            
             if (ModelState.IsValid)
             {
-                int totalQuantity = 0;
-                decimal subPrice = 0;
-                foreach(var item in items)
-                {
-                    Product product = _context.Products.Find(item.ProductId);
-                    item.TotalPrice = product.Price*item.Quantity;
-                    item.product = product;
-                    totalQuantity += item.Quantity;
-                    subPrice += item.TotalPrice;
-                }
-                var order = new Order()
-                {
-                    CustomerId = _userManager.GetUserId(User),
-                    OrderDate = DateTime.Now,
-                    ShippingPrice = 0,
-                    SubTotalPrice = subPrice,
-                    TotalPrice = subPrice,
-                    TotalQuantity = totalQuantity,
-                    PaymentMethod = "Cash",
-                    orderItems = items
-                };
-                HttpContext.Session.SetString("Order",JsonConvert.SerializeObject(order)) ;
-                CheckoutViewModel checkoutView = new CheckoutViewModel
-                {
-                    order = order
-                };
+                Order order = await _orderServices.CreateOrder(items);
+                CheckoutViewModel checkoutView = new CheckoutViewModel(order){};
                 return View("checkout", checkoutView);
-
             }
             return RedirectToAction("Index");
         }

@@ -168,7 +168,7 @@
 
             </form>
                 <span class="text-start mt-4">
-                    Already have an account? <a href="login.html"
+                    Already have an account? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" 
                                                 class="text-decoration-none ms-2">
                         Log
                         in
@@ -227,6 +227,7 @@
             that
             we have just sent you.
         </p>
+        <p class="text-danger">YOU MIGHT FOUND EMAIL CONFIRMATION MESSEGE IN YOUR UNWANTED MESSAGES</p>
         <p>Enjoy shopping!</p>
         <hr>
         <p class="mb-0">

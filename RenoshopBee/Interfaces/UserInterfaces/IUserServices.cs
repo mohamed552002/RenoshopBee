@@ -2,8 +2,10 @@
 
 namespace RenoshopBee.Interfaces.UserInterfaces
 {
-    public interface IUserContext
+    public interface IUserServices
     {
         public Task<IEnumerable<ApplicationUser>> GetUsersAsync();
+        public Task<ApplicationUser> GetCurrenUserDetailsAsync();
+        public Task<string> GetuserId();
     }
 }

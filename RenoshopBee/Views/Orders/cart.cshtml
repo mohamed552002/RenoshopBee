@@ -41,15 +41,23 @@
                     </td>
                     <td class="py-4 col-2 d-none d-md-flex align-items-center justify-content-center text-center">
                         <div class="d-flex flex-column align-items-center">
-                                    @if (Model.products[i].availableSizes!=null){
-                            <select name="items[@i].Size">
-                                <option disabled selected>Size:</option>
-                                @foreach(var size in Model.products[i].availableSizes){
-                                            <option>@size.Size</option>
-                                }
-                            </select>
+                                    @if (Model.products[i].availableSizes.Count > 0)
+                                    {
+                                        <select name="items[@i].Size">
+                                            <option disabled selected>Size:</option>
+                                            @foreach (var size in Model.products[i].availableSizes)
+                                            {
+                                                <option>@size.Size</option>
+                                            }
+                                        </select>
                                     }
-                            <select class="mt-1" name="items[@i].Color">
+                                    else{
+                                        <select hidden name="items[@i].Size">
+                                            <option selected>None</option>
+                                        </select>
+                                    }
+
+                                        <select class="mt-1" name="items[@i].Color">
                                 <option disabled selected>Color:</option>
                                 <option>Black</option>
                                 <option>White</option>

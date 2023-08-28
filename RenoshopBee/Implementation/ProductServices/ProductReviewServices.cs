@@ -5,19 +5,19 @@ using RenoshopBee.Interfaces.UserInterfaces;
 using RenoshopBee.Models;
 using RenoshopBee.ViewModels;
 
-namespace RenoshopBee.Implementation
+namespace RenoshopBee.Implementation.ProductServices
 {
     public class ProductReviewServices : IProductReview
     {
         private readonly ApplicationDbContext _context;
-        private readonly IUserContext _userContext;
-        public ProductReviewServices(ApplicationDbContext context, IUserContext userContext)
+        private readonly IUserServices _userContext;
+        public ProductReviewServices(ApplicationDbContext context, IUserServices userContext)
         {
             _context = context;
             _userContext = userContext;
         }
 
-        public IEnumerable<UsersReviews> JoinUserWithReview(IEnumerable<ApplicationUser> user,IEnumerable<ProductReview> productReview)
+        public IEnumerable<UsersReviews> JoinUserWithReview(IEnumerable<ApplicationUser> user, IEnumerable<ProductReview> productReview)
         {
             return user
                 .Join(productReview, user => user.Id

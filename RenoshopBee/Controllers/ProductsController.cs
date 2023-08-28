@@ -13,7 +13,7 @@ namespace RenoshopBee.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly IUserContext _userContext;
+        private readonly IUserServices _userContext;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -31,7 +31,7 @@ namespace RenoshopBee.Controllers
             IProductImage productImage,
             IProductReview productReview,
             IProductContext productContext,
-            IUserContext userContext)
+            IUserServices userContext)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;

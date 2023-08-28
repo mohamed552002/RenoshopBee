@@ -3,7 +3,7 @@ using RenoshopBee.Data;
 using RenoshopBee.Interfaces.ProductInterfaces;
 using RenoshopBee.Models;
 
-namespace RenoshopBee.Implementation
+namespace RenoshopBee.Implementation.ProductServices
 {
     public class ProductContextServices : IProductContext
     {
@@ -17,7 +17,10 @@ namespace RenoshopBee.Implementation
         {
             return await _context.Products.FirstOrDefaultAsync(product => product.ID == productId); ;
         }
-
+        public Product GetProductById(int productId)
+        {
+            return  _context.Products.FirstOrDefault(product => product.ID == productId); ;
+        }
         public IEnumerable<Product> GetProducts()
         {
             return _context.Products.ToList();

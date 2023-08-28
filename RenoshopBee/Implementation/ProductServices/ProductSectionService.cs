@@ -3,9 +3,9 @@ using RenoshopBee.Data;
 using RenoshopBee.Interfaces.ProductInterfaces;
 using RenoshopBee.Models;
 
-namespace RenoshopBee.Implementation
+namespace RenoshopBee.Implementation.ProductServices
 {
-    public class ProductSectionService:IProductSection
+    public class ProductSectionService : IProductSection
     {
         private readonly ApplicationDbContext _context;
         public ProductSectionService(ApplicationDbContext context)

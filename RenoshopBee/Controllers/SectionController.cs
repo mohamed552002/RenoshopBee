@@ -22,7 +22,7 @@ namespace RenoshopBee.Controllers
 
             var sectionProducts = await _productSection.GetSectionProductsAsync(section, sort, pageNumber);
             var NumOfAllProducts = sectionProducts.Count();
-            ViewBag.PForm = ((pageNumber - 1) * 10) + 1;
+            ViewBag.PFrom = ((pageNumber - 1) * 10) + 1;
             ViewBag.PTo = NumOfAllProducts > 10 ? ((pageNumber - 1) * 10) + 10 : ((pageNumber - 1) * 10) + NumOfAllProducts;
             ViewBag.pageNumber = pageNumber;
             ViewBag.sort = sort;

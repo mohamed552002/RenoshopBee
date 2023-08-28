@@ -2,9 +2,9 @@
 using RenoshopBee.Interfaces.ProductInterfaces;
 using RenoshopBee.Models;
 
-namespace RenoshopBee.Implementation
+namespace RenoshopBee.Implementation.ProductServices
 {
-    public class ProductImageService:IProductImage
+    public class ProductImageService : IProductImage
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
         public ProductImageService(IWebHostEnvironment webHostEnvironment)

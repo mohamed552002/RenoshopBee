@@ -16,10 +16,10 @@
     <div class="filtering-products border-bottom d-flex justify-content-between mb-2 flex-column flex-md-row align-items-center align-items-md-start gap-4 gap-md-0">
         <div class="sort-head row">
             <div class="results text-black-50 order-2 col-6">
-                <p>Showing @(ViewBag.PFrom)-@(ViewBag.PTo) of @ViewBag.allProducts results</p>
+                <p>Showing @(ViewBag.PFrom) - @(ViewBag.PTo) of results</p>
             </div>
             <div class="filter text-black-50 order-1 col-6 justify-content-right">
-                Sort by newness
+                Sort by ...
                 <i class="fas fa-chevron-down ps-5"></i>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     <img class="img-fluid" src="@product.Img_url" alt="product">
                     <div class="product-buttons">
                         <form method="post">
-                            <button asp-controller="Home" asp-action="AddToCart" asp-route-id="@product.ID" type="submit" class="add-to-cart">
+                            <button asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.ID" type="submit" class="add-to-cart">
                                 <i class="fas fa-shopping-cart"></i>
                             </button>
                         </form>

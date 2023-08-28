@@ -76,7 +76,7 @@
                     <div class="positive col-3 p-0 text-center py-2 border-start fs-5 fw-bold">+</div>
                  </div>-->
                 <div class="ordering-options p-0">
-                    <form asp-controller="Home" asp-action="AddToCart" asp-route-id="@Model.product.ID">
+                    <form asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.product.ID">
                     <button id="addToCartBtn"
                             class="btn btn-primary text-white text-uppercase rounded-0 px-2 py-2 mb-2">
                         <i class="fas fa-shopping-cart"></i>

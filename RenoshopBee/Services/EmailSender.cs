@@ -8,8 +8,8 @@ namespace RenoshopBee.Services
     {
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var fromMail = "renoshopebee@outlook.com";
-            var fromPassword = "Renooshopbee@123";
+            var fromMail = "mozamezo638@gmail.com";
+            var fromPassword = "vmzCwKyA2hZULtJD";
 
             var message = new MailMessage();
             message.From = new MailAddress(fromMail);
@@ -17,7 +17,7 @@ namespace RenoshopBee.Services
             message.To.Add(email);
             message.Body = $"<html><body>{htmlMessage}</body></html>";
             message.IsBodyHtml = true;
-            var smtpClient = new SmtpClient("smtp.outlook.com")
+            var smtpClient = new SmtpClient("smtp-relay.sendinblue.com")
             {
 
                 Port = 587,
@@ -27,6 +27,10 @@ namespace RenoshopBee.Services
             };
             smtpClient.Send(message);
             smtpClient.Dispose();
+        }
+        public async Task SendEmail(string email, string subject)
+        {
+
         }
     }
 }

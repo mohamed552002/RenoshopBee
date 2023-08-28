@@ -1,9 +1,9 @@
 ﻿using RenoshopBee.Interfaces.ProductInterfaces;
 using RenoshopBee.Models;
 
-namespace RenoshopBee.Implementation
+namespace RenoshopBee.Implementation.ProductServices
 {
-    public class ProductDateServices:IProductDate
+    public class ProductDateServices : IProductDate
     {
         public void SetProductDatesToNow(Product product)
         {

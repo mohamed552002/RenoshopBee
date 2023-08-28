@@ -7,18 +7,22 @@ using RenoshopBee.Data;
 using RenoshopBee.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using RenoshopBee.Services;
-using RenoshopBee.Interfaces;
 using RenoshopBee.Interfaces.ProductInterfaces;
-using RenoshopBee.Implementation;
 using RenoshopBee.Interfaces.UserInterfaces;
-using RenoshopBee.Implementation.User;
+using RenoshopBee.Implementation.UserImp;
+using RenoshopBee.Interfaces.CartInterfaces;
+using RenoshopBee.Implementation.ProductServices;
+using RenoshopBee.Implementation.OrderImp;
+using RenoshopBee.Interfaces.OrderInterfaces;
+using RenoshopBee.Interfaces.OrderItemInterfaces;
+using RenoshopBee.Implementation.OrderItemImp;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
-options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString3")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString1")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(option => option.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI()
@@ -33,7 +37,9 @@ builder.Services.AddTransient<IProductDate, ProductDateServices>();
 builder.Services.AddTransient<IProductContext, ProductContextServices>();
 builder.Services.AddTransient<IProductSortTechnique, SortByModifiedDate>();
 builder.Services.AddTransient<IProductSortTechnique, SortByPrice>();
-builder.Services.AddTransient<IUserContext, UserContextService>();
+builder.Services.AddTransient<IUserServices, UserContextService>();
+builder.Services.AddTransient<IOrderServices, OrderServices>();
+builder.Services.AddTransient<IOrderItemServices, OrderItemServices>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {
     options.Cookie.Name = "RememberMe";

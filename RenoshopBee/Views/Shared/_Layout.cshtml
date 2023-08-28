@@ -1,6 +1,7 @@
 ﻿@inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignManager
 @inject IHttpContextAccessor Accessor
+@inject ICartMethods _cartMethods
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,9 +75,13 @@
                     <div class="others d-flex gap-3 order-1">
                         <div class="shopping-cart text-black d-flex align-items-center px-2">
                             <i class="fas fa-shopping-cart button"></i>
+                            @if (!(_cartMethods.IsCartEmpty()))
+                            {
+                                <div class="numberOfCartItems">@_cartMethods.GetCartItemsNum()</div>
+                            }
                             <div class="card-items d-flex  flex-column" style="overflow: auto;">
                                 <table>
-                                @if (Accessor.HttpContext.Session.GetString("_cart") == null)
+                                @if (_cartMethods.IsCartEmpty())
                                 {
                                     <i class="fas fa-exclamation  text-primary p-5 pb-2"></i>
                                         <p class="text-capitalize text-center pb-5">your cart is empty</p>
@@ -84,7 +89,7 @@
                                 else
                                 { 
                                     
-                                    foreach (var item in JsonConvert.DeserializeObject<Cart>(Accessor.HttpContext.Session.GetString("_cart")).products)
+                                    foreach (var item in _cartMethods.GetCart().products)
                                     {
                                         <tr class="mt-1">
                                             <td ><img style="width:3rem;border:1px solid;border-radius:100%; " src=@item.Img_url /></td>
@@ -136,7 +141,7 @@
                             <div class="user-nav">
                                 <ul class="list-unstyled">
                                     <li class="p-2 my-2 border-bottom d-flex align-items-center gap-2">
-                                        <a asp-action="UserDetails">
+                                        <a asp-controller="User" asp-action="UserDetails">
                                         <i class="far fa-user-circle text-primary"></i>
                                         View Profile
                                         </a>

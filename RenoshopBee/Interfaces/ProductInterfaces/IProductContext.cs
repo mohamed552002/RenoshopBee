@@ -7,5 +7,6 @@ namespace RenoshopBee.Interfaces.ProductInterfaces
        public Task<IEnumerable<Product>> GetProductsAsync();
        public IEnumerable<Product> GetProducts();
        public Task<Product> GetProductByIdAsync(int productId);
+       public Product GetProductById(int productId);
     }
 }

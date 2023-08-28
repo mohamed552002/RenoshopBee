@@ -126,6 +126,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Implementation\Cart\" />
     <Folder Include="wwwroot\images\Users\" />
   </ItemGroup>
 

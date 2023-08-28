@@ -38,7 +38,7 @@
                         <img class="img-fluid" src="@item.Img_url" alt="product">
                         <div class="product-buttons">
                             <form method="post">
-                                <button asp-action="AddToCart" asp-route-id="@item.ID" type="submit" class="add-to-cart">
+                                <button asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.ID" type="submit" class="add-to-cart">
                                     <i class="fas fa-shopping-cart"></i>
                                 </button>
                             </form>
@@ -128,7 +128,7 @@
                 <img class="img-fluid" src=@product.Img_url alt="product">
                 <div class="product-buttons">
                         <form method="post" >
-                            <button asp-action="AddToCart" asp-route-id="@product.ID" type="submit" class="add-to-cart">
+                            <button asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.ID" type="submit" class="add-to-cart">
                         <i class="fas fa-shopping-cart"></i>
                     </button>
                     </form>

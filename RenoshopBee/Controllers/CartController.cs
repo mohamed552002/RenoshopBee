@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using RenoshopBee.Interfaces;
+using RenoshopBee.Interfaces.CartInterfaces;
 using RenoshopBee.Models;
 
 namespace RenoshopBee.Controllers
@@ -12,20 +13,27 @@ namespace RenoshopBee.Controllers
         {
             _cartMethods = cartMethods;
         }
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddToCart(int id)
+        {
+            var returnUrl = Request.Headers["Referer"].ToString();
+            _cartMethods.AddProductToCart(id);
+            return Redirect(returnUrl);
+        }
         public IActionResult DeletefromCart(int id)
         {
             var returnUrl = Request.Headers["Referer"].ToString();
-            var cartJson = HttpContext.Session.GetString("_cart");
-            var cart = JsonConvert.DeserializeObject<Cart>(cartJson);
+            var cart = _cartMethods.GetCart();
             _cartMethods.RemoveProductFromCart(id,cart);
-            if (_cartMethods.GetCartItemsNum(cart) <= 0)
+            if (_cartMethods.GetCartItemsNum() <= 0)
             {
                 HttpContext.Session.Clear();
             }
             else
             {
                 HttpContext.Session.SetString("_cart", JsonConvert.SerializeObject(cart));
-
             }
             return Redirect(returnUrl);
         }
