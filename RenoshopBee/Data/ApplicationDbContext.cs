@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RenoshopBee.Models;
 
 namespace RenoshopBee.Data
@@ -21,7 +22,6 @@ namespace RenoshopBee.Data
             builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims", "security");
             builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins", "security");
             builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens", "security");
-
         }
 
         public DbSet<Product>Products { get; set; }
@@ -31,5 +31,7 @@ namespace RenoshopBee.Data
         public DbSet<OrderItem> orderItems { get; set; }
         public DbSet<CreditCard> creditCards { get; set; }
         public DbSet<ProductSizes> productSizes { get; set; }
+        public DbSet<Wishlist> wishlists { get; set; }
+        public DbSet<WishlistItem> wishlistItem { get; set; }
     }
 }

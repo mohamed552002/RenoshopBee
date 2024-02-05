@@ -7,5 +7,6 @@ namespace RenoshopBee.Interfaces.ProductInterfaces
     {
         public IEnumerable<UsersReviews> JoinUserWithReview(IEnumerable<ApplicationUser> user, IEnumerable<ProductReview> review);
         public Task<IEnumerable<UsersReviews>> ViewProductReviewsAsync(int productId);
+        public ProductReview GetProductReviewById(int productId);
     }
 }

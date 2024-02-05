@@ -1,4 +1,5 @@
 ﻿@model RenoshopBee.ViewModels.ProductDetailsVM
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Details";
@@ -21,15 +22,23 @@
             </div>
         </div>
         <div class="product-description col-lg-7 my-5 my-lg-0">
+            
             <h3 id="productName"> @Html.DisplayFor(m => m.product.Name)</h3>
             <div class="product-info d-flex align-items-center">
                 <div class="product-price mb-2 d-inline-block fs-2 pt-2">@Html.DisplayFor(m => m.product.Price)</div>
                 <div class="product-rating d-inline-block fs-5 ps-3">
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas fas fa-star filled"></i>
-                    <i class="fas far fa-star unfilled"></i>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (i <= Model.totalRate)
+                        {
+                            <i class="fas fas fa-star filled"></i>
+                        }
+                        else
+                        {
+                            <i class="fas far fa-star unfilled"></i>
+                        }
+
+                    }
                 </div>
             </div>
 
@@ -75,7 +84,7 @@
                     <div class="amount col-6 p-0 text-center py-2 fs-6">1</div>
                     <div class="positive col-3 p-0 text-center py-2 border-start fs-5 fw-bold">+</div>
                  </div>-->
-                <div class="ordering-options p-0">
+                <div class="ordering-options p-0 d-flex align-items-center">
                     <form asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.product.ID">
                     <button id="addToCartBtn"
                             class="btn btn-primary text-white text-uppercase rounded-0 px-2 py-2 mb-2">
@@ -83,6 +92,12 @@
                         add to cart
                     </button>
                     </form>
+                        <form method="post">
+                        <button asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-productId="@Model.product.ID" type="submit"
+                        class="add-to-wishlist btn btn-primary text-white text-uppercase rounded-0 px-2 py-2 ms-2 mb-2 add-to-wishlist">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </form>
                 </div>
             </div>
         </div>
@@ -111,93 +126,8 @@
             </div>
             <div class="tab-pane fade bg-light py-3 px-4" id="Reviews-tab-pane" role="tabpanel"
                  aria-labelledby="Reviews-tab" tabindex="0">
-                <h5>
-                    <span id="revNumber">2</span> reviews for <span id="productName">@Model.product.Name</span>
-                </h5>
-                <div class="reviews-section">
-                    <div class="reviews row my-4">
-                        @if (Model.usersReviews != null)
-                        {
-                            @foreach (var item in Model.usersReviews)
-                            {
-                                <div class="review-body col-12 row mb-4">
-                                    <div class="profile-img d-none d-md-block col-md-2 col-lg-1 my-3">
-                                        <img class="img-fluid" src=@item.Img_Url alt="user">
-                                    </div>
-                                    <div class="review-content col-12 col-md-10 col-lg-11 row bg-white p-3 ms-1">
-                                        <div class="first-row d-flex flex-column flex-md-row order-2 py-1">
-                                            <div class="product-rating pe-md-4 border-md-end">
-                                                <i class="fas fas fa-star filled"></i>
-                                                <i class="fas fas fa-star filled"></i>
-                                                <i class="fas fas fa-star filled"></i>
-                                                <i class="fas fas fa-star filled"></i>
-                                                <i class="fas fas fa-star filled"></i>
-                                            </div>
-                                            <span id="reviewDate"
-                                          class="reviewDate ps-md-4 text-black-50 fst-italic">2022/12/1</span>
-                                        </div>
-                                        <div class="userName order-1 order-md-2">
-                                            <h6 class="text-uppercase pb-0 pb-md-3 pt-3 fw-bold">@item.FirstName @item.LastName </h6>
-                                        </div>
-                                        <div class="review-text order-3">
-                                            @item.ReviewBody
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-
-                        }
-                        else
-                        {
-                                    <h3>There is no Reviews</h3>
-                        }
-                    </div>
-                    <form method="post" asp-action="AddReview">
-                    <div class="addNewRev">
-                        <div class="header">
-                            <h5 class="mb-4">Add a review</h5>
-                        </div>
-                        <div class="review-form row container">
-                            <div class="ratingAndTextarea d-flex align-items-center px-0 my-4 flex-column flex-md-row">
-                                <p class="m-md-0 pe-md-5">Your review</p>
-                                <div class="rating-choose d-flex ms-5 gap-4">
-                                    <span>Your Rating:</span>
-                                    <div class="rating-selection d-flex">
-                                        <div class="one mx-1 ps-1">
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <div class="two mx-1 ps-1 border-start">
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <div class="three mx-1 ps-1 border-start">
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <div class="four mx-1 ps-1 border-start">
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <div class="five mx-1 ps-1 border-start">
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                <textarea asp-for="review.ReviewBody" class="reviewTA col-12 p-2 border rounded me-lg-5"></textarea>
-                                <input asp-for="review.ProductId" hidden value="@Model.product.ID" />
-                                <input type="submit" id="newComment" class="btn btn-primary text-white text-uppercase rounded-0 me-5 py-2 col-6 col-lg-3 mt-3"
-                                value="submit"/>
-                        </div>
-                    </div>
-                    </form>
+                 <div id="PartRev">
+                    <partial name="_Rev" />
                 </div>
             </div>
         </div>
@@ -221,15 +151,17 @@
                     <div class="product-img">
                         <img class="img-fluid" src="@item.Img_url" alt="product">
                         <div class="product-buttons">
-                            <div class="add-to-cart">
-                                <i class="fas fa-shopping-cart"></i>
-                            </div>
-                            <div class="add-to-wishlist">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <div class="return-product">
-                                <i class="fas fa-retweet"></i>
-                            </div>
+                            <form method="post">
+                                <button asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.ID" type="submit" class="add-to-cart">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </form>
+                            <form method="post" id="wishlistbtn">
+                                <button asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-productId="@item.ID" type="submit" class="add-to-wishlist">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </form>
+
                         </div>
                     </div>
                     <div class="product-name text-capitalize pt-2">
@@ -243,3 +175,66 @@
         </div>
     </div>
 </section>
+@section Scripts{
+<script>
+    console.log("xasd")
+    // function EditReview(id) {
+    //     console.log("GG")
+    //     document.querySelector("review-text-" + id).style.display = none;
+    //     }
+        document.querySelector(".editBtn").forEach(btn => btn.addEventListener("click", function () {
+            console.log("Yes")
+            var divReview = document.getElementById("divReview");
+            var reviewTextArea = document.getElementById("reviewTextArea");
+
+            if (divReview.style.display === "none") {
+                // If the textarea is visible, switch to the div
+                divReview.style.display = "block";
+                reviewTextArea.style.display = "none";
+                divReview.textContent = reviewTextArea.value;
+            } else {
+                // If the div is visible, switch to the textarea
+                divReview.style.display = "none";
+                reviewTextArea.style.display = "block";
+                reviewTextArea.value = divReview.textContent;
+            }
+        }));
+        }        document.querySelector('.submitRev').addEventListener('click', function () {
+            // Get values from input fields
+             
+        });
+
+    }
+        const stars = document.querySelectorAll('.star');
+        let selectedStar = null;
+        console.log(selectedStar)
+        stars.forEach(star => {
+            star.addEventListener('mouseover', () => {
+                selectedStar = null
+                const starValue = star.getAttribute('data-star');
+                for (let i = 0; i < starValue; i++) {
+                    stars[i].classList.add('selected');
+                }
+            });
+
+            star.addEventListener('mouseout', () => {
+                if (selectedStar === null) {
+                    console.log(`Star value is:${selectedStar}`);
+                    stars.forEach(s => s.classList.remove('selected'));
+                }
+            });
+            star.addEventListener('click', () => {
+                const starValue = star.getAttribute('data-star');
+                console.log(`Star value is:${selectedStar}`);
+                if (selectedStar === starValue) {
+                    console.log(`Star value is:${selectedStar}`);
+                    selectedStar = null;
+                    star.classList.remove('selected');
+                } else {
+                    selectedStar = starValue;
+                    console.log(`Star value is:${selectedStar}`);
+                }
+            });
+        });
+</script>
+}

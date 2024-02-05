@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Identity.Client;
 using RenoshopBee.Data;
 using RenoshopBee.Interfaces.ProductInterfaces;
 using RenoshopBee.Interfaces.UserInterfaces;
 using RenoshopBee.Models;
 using RenoshopBee.ViewModels;
+using System.Linq.Expressions;
 
 namespace RenoshopBee.Controllers
 {
@@ -58,24 +60,78 @@ namespace RenoshopBee.Controllers
             {
                 return NotFound();
             }
+            
             ProductDetailsVM productDetalis = new ProductDetailsVM(await _productContext.GetProductByIdAsync(id),await _productReview.ViewProductReviewsAsync(id),await _productContext.GetProductsAsync());
+            productDetalis.totalRate = productDetalis.usersReviews!=null? Math.Round(((double)(productDetalis.usersReviews.Sum(reviews => reviews.Rate))/productDetalis.usersReviews.Count())):0;
             if (productDetalis.product == null)
             {
                 return NotFound();
             }
             return View(productDetalis);
         }
-
-        [Authorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Route("Products/Details/AddReview")]
         public async Task<IActionResult> AddReview(ProductReview review)
         {
-            
+            review.LastEditedAt = DateTime.Now;
             review.UserId =  _userManager.GetUserAsync(User).Result.Id;
              _context.Add(review);
             await _context.SaveChangesAsync();
-            return Redirect($"Details/{review.ProductId}");
+            return Ok();
+        }
+        [HttpGet]
+        [Route("Products/GetReviews/{id}")]
+        public async Task<PartialViewResult> GetReviews(int id)
+        {
+            ProductDetailsVM productDetalis = new ProductDetailsVM(await _productContext.GetProductByIdAsync(id), await _productReview.ViewProductReviewsAsync(id), await _productContext.GetProductsAsync());
+            return PartialView("_Rev",productDetalis);
+            
+        }
+        [HttpDelete]
+        [Route("Products/Details/DeleteReview/{ReviewId}")]
+        public IActionResult DeleteReview(int ReviewId)
+        {
+            try
+            {
+                var Review = _context.ProductReviews.Find(ReviewId);
+                _context.ProductReviews.Remove(Review);
+                _context.SaveChanges();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        //public IActionResult EditReview(int ReviewId , string reviewBody)
+        //{
+        //    var returnUrl = Request.Headers["Referer"].ToString();
+        //    var Review = _productReview.GetProductReviewById(ReviewId);
+        //    Review.ReviewBody = reviewBody;
+        //    _context.ProductReviews.Update(Review);
+        //    _context.SaveChanges();
+        //    return Redirect(returnUrl);
+
+        //}
+        [Route("Products/Details/EditReview")]
+        [HttpPost]
+        public IActionResult EditReview(EditReviewVM reviewVM)
+        {
+            var Review = _productReview.GetProductReviewById(reviewVM.ReviewId);
+            Review.ReviewBody = reviewVM.ReviewBody;
+            Review.ProductRate = reviewVM.reviewRate;
+            Review.LastEditedAt = DateTime.Now; 
+            _context.ProductReviews.Update(Review);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+        [Route("Products/Details/GetEditReview/{id}")]
+        public async Task<IActionResult> GetEditReview(int id,int reviewID)
+        {
+            ProductDetailsVM productDetalis = new ProductDetailsVM(await _productContext.GetProductByIdAsync(id), await _productReview.ViewProductReviewsAsync(id), await _productContext.GetProductsAsync());
+            productDetalis.ProductToEditID = reviewID;
+            return PartialView("_EditRev", productDetalis);
         }
         [Authorize]
         // GET: Products/Create

@@ -44,7 +44,7 @@ namespace RenoshopBee.Controllers
             
             if (ModelState.IsValid)
             {
-                Order order = await _orderServices.CreateOrder(items);
+                Order order = _orderServices.CreateOrder(items);
                 CheckoutViewModel checkoutView = new CheckoutViewModel(order){};
                 return View("checkout", checkoutView);
             }

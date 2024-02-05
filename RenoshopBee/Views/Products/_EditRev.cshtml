@@ -1,0 +1,111 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using RenoshopBee.Models;
+@model RenoshopBee.ViewModels.ProductDetailsVM
+@inject UserManager<ApplicationUser> UserManager
+@foreach (var item in Model.usersReviews)
+{
+    if (Model.ProductToEditID == item.ReviewId)
+    {
+    <div id="@item.ReviewId" class="review-body col-12 row mb-4">
+        <div class="profile-img d-none d-md-block col-md-2 col-lg-1 my-3">
+            <img class="img-fluid" src=@item.Img_Url alt="user">
+        </div>
+        <div class="review-content col-12 col-md-10 col-lg-11 row bg-white p-3 ms-1">
+            <div class="first-row d-flex flex-column flex-md-row order-2 py-1">
+                <div class="product-rating pe-md-4 border-md-end">
+                    <div class="rating-choose d-flex gap-4">
+                        <div class="rating-selection d-flex">
+                            <div class="rating">
+                                    <span onmouseover="onHoverStarsEdit()" class="star" data-star="1">&#9733;</span>
+                                    <span onmouseover="onHoverStarsEdit()" class="star" data-star="2">&#9733;</span>
+                                    <span onmouseover="onHoverStarsEdit()" class="star" data-star="3">&#9733;</span>
+                                    <span onmouseover="onHoverStarsEdit()" class="star" data-star="4">&#9733;</span>
+                                    <span onmouseover="onHoverStarsEdit()" class="star" data-star="5">&#9733;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span id="reviewDate"
+                      class="reviewDate ps-md-4 text-black-50 fst-italic col-9">@item.LastUpdatedAt</span>
+            </div>
+            <div class="userName order-1 order-md-2">
+                <h6 class="text-uppercase pb-0 pb-md-3 pt-3 fw-bold">@item.FirstName @item.LastName </h6>
+            </div>
+            <div class="review-text-@item.ReviewId order-3" id="divReview" style="display:none;">
+                @item.ReviewBody
+            </div>
+            <div class="review-form-@item.ReviewId input-group mb-3 order-3" style="display:block;">
+                <form class="d-flex w-100" method="post">
+                    <input type="hidden" value="@item.ReviewId" class="RevId">
+                        <input type="hidden" value="@Model.product.ID" class="productId">
+                    <input type="text" class="RevBody form-control" value="@item.ReviewBody">
+                    <div class="input-group-append">
+                            <input type="button" class="submitRev-@item.ReviewId btn btn-outline-primary" value="submit" onclick="supmitUpdatedReview()">
+                        <!--<button class="submitRev btn btn-outline-primary">Submit</button>-->
+                    </div>
+                </form>
+            </div>
+            <textarea id="reviewTextArea" class="review-text order-3" style="display: none;"></textarea>
+        </div>
+
+        </div>
+    }
+    else
+    {
+        <div id="@item.ReviewId" class="review-body col-12 row mb-4">
+            <div class="profile-img d-none d-md-block col-md-2 col-lg-1 my-3">
+                <img class="img-fluid" src=@item.Img_Url alt="user">
+            </div>
+            <div class="review-content col-12 col-md-10 col-lg-11 row bg-white p-3 ms-1">
+                <div class="first-row d-flex flex-column flex-md-row order-2 py-1">
+                    <div class="product-rating pe-md-4 border-md-end">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= item.Rate)
+                            {
+                                <i class="fas fas fa-star filled"></i>
+                            }
+                            else
+                            {
+                                <i class="fas far fa-star unfilled"></i>
+                            }
+
+                        }
+                    </div>
+                    <span id="reviewDate"
+                          class="reviewDate ps-md-4 text-black-50 fst-italic col-9">@item.LastUpdatedAt</span>
+                    @if (UserManager.GetUserId(User) == item.UserId)
+                    {
+                        <div style="margin-left: auto;">
+                            <button class="editBtn" id="editButton" onclick="updateRev(@Model.product.ID)" style="all:unset; cursor:pointer; font-size:20px;"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onclick="deleteReview(@item.ReviewId)" style="all:unset; cursor:pointer; font-size:20px;">
+                                <i class="fa-solid fa-trash w-auto"></i>
+                            </button>
+                        </div>
+                    }
+                </div>
+                <div class="userName order-1 order-md-2">
+                    <h6 class="text-uppercase pb-0 pb-md-3 pt-3 fw-bold">@item.FirstName @item.LastName </h6>
+                </div>
+                <div class="review-text-@item.ReviewId order-3" id="divReview">
+                    @item.ReviewBody
+                </div>
+                <div class="review-form-@item.ReviewId input-group mb-3 order-3" style="display:none;">
+                    <form class="d-flex w-100" method="post">
+                        <input type="hidden" value="@item.ReviewId" class="RevId">
+                        <input type="text" class="RevBody form-control" value="@item.ReviewBody">
+                        <div class="input-group-append">
+                            <input type="button" class="submitRev-@item.ReviewId btn btn-outline-primary" value="submit" onclick="updateReview(@item.ReviewId)">
+                            <!--<button class="submitRev btn btn-outline-primary">Submit</button>-->
+                        </div>
+                    </form>
+                </div>
+                <textarea id="reviewTextArea" class="review-text order-3" style="display: none;"></textarea>
+            </div>
+
+        </div>
+    }
+}
+@section Scripts{
+    <script></script>
+}

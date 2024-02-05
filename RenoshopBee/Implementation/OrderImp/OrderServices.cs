@@ -34,10 +34,10 @@ namespace RenoshopBee.Implementation.OrderImp
             _orderItemService.assignProductForEachItem(items);
         }
 
-        public async Task<Order> CreateOrder(List<OrderItem> items)
+        public  Order CreateOrder(List<OrderItem> items)
         {
             handleOrderItems(items);
-            var order = new Order(await _userService.GetuserId(), clacSubOrderPrice(items), calcOrderTotalQuantity(items)) { };
+            var order = new Order(_userService.GetuserId(), clacSubOrderPrice(items), calcOrderTotalQuantity(items)) { };
             order.orderItems = items;
             _httpContextAccessor.HttpContext.Session.SetString("Order", JsonConvert.SerializeObject(order));
             return order;

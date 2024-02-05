@@ -6,6 +6,6 @@ namespace RenoshopBee.Interfaces.UserInterfaces
     {
         public Task<IEnumerable<ApplicationUser>> GetUsersAsync();
         public Task<ApplicationUser> GetCurrenUserDetailsAsync();
-        public Task<string> GetuserId();
+        public string GetuserId();
     }
 }

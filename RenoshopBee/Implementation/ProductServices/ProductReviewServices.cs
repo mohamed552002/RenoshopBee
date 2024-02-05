@@ -17,6 +17,12 @@ namespace RenoshopBee.Implementation.ProductServices
             _userContext = userContext;
         }
 
+        public ProductReview GetProductReviewById(int reviewId)
+        {
+            var Review = _context.ProductReviews.FirstOrDefault(Review => Review.Id == reviewId);
+            return Review;
+        }
+
         public IEnumerable<UsersReviews> JoinUserWithReview(IEnumerable<ApplicationUser> user, IEnumerable<ProductReview> productReview)
         {
             return user
@@ -24,10 +30,14 @@ namespace RenoshopBee.Implementation.ProductServices
                 , product => product.UserId
                 , (user, productReview) => new UsersReviews
                 {
+                    ReviewId = productReview.Id,
+                    UserId = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Img_Url = user.Img_Url,
-                    ReviewBody = productReview.ReviewBody
+                    ReviewBody = productReview.ReviewBody,
+                    LastUpdatedAt = productReview.LastEditedAt,
+                    Rate = productReview.ProductRate  
                 });
         }
 

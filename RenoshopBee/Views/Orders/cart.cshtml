@@ -18,7 +18,7 @@
             <table class="row table table-bordered table-hover m-0">
         <thead class=" p-0">
             <tr class="m-0  row align-items-center justify-content-center">
-                <th class="py-4 col-4  text-center">Products</th>
+                <th class="py-4 col-4  text-center" >Products</th>
                 <th class="py-4 col-2 d-none d-md-block text-center">Color/size</th>
                 <th class="py-4 col-4 col-md-2 text-center">Quantity</th>
                 <th class="p-4 col-2 d-none d-md-block text-center">Price</th>
@@ -83,7 +83,7 @@
                     <td class="p-4 col-4 col-md-2 d-flex justify-content-center align-items-center text-center ">
                         <div class="d-flex justify-content-around align-items-center gap-4 gap-lg-5" >
                             <p name="items[@i].TotalPrice" class="total-price@($"{i}")" >@Model.products[i].Price</p>
-                            <button style="all:unset;" asp-controller="Cart" asp-action="DeletefromCart" asp-route-id="@Model.products[i].ID"><i class="fas fa-window-close text-danger"></i></button>
+                                    <button onclick="console.log("dsa")" class="removeitem" style="all:unset;" asp-controller="Cart" asp-action="DeletefromCart" asp-route-id="@Model.products[i].ID"><i class="fas fa-window-close text-danger"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -195,6 +195,13 @@
             console.log(price, quantity);
             var totalPrice =parseFloat(price) * parseInt(quantity);
             document.querySelector(`.total-price${i}`).textContent =`${totalPrice}`;
+        }
+        
+        function goBack(){
+            setInterval(()=>{
+                history.back();
+                console.log("asd");
+            },5000)
         }
         
     </script>

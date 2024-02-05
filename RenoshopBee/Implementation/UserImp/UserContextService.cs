@@ -28,11 +28,10 @@ namespace RenoshopBee.Implementation.UserImp
             return user;
         }
 
-        public async Task<string> GetuserId()
+        public string GetuserId()
         {
             HttpContext httpContext = _httpContextAccessor.HttpContext;
-            ApplicationUser user = await _userManager.GetUserAsync(httpContext.User);
-            return user.Id;
+            return _userManager.GetUserAsync(httpContext.User).Result.Id;
         }
 
         public async Task<IEnumerable<ApplicationUser>> GetUsersAsync()

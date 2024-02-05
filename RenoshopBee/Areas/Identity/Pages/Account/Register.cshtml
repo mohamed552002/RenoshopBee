@@ -14,9 +14,7 @@
             <div class="info rounded">
                 <h3 class="text-capitalize text-center pt-3">The best online fashion store ever</h3>
                 <p class=" text-center text-white-50 px-3">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Nemo,
-                    sint.
+                    From Here you can purchase Modern fashion 
                 </p>
             </div>
         </div>
@@ -31,8 +29,8 @@
                 </p>
             </div>
             <div class="form-content px-3 px-md-5 d-flex flex-column">
-                <form asp-route-returnUrl="@Model.ReturnUrl" enctype="multipart/form-data" class="sign-up-body row m-0" >
-                    <div asp-validation-summary="ModelOnly"></div>
+            <form asp-route-returnUrl="@Model.ReturnUrl" enctype="multipart/form-data" class="formInput sign-up-body row m-0">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                 <div class="name mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black uname" for="uname">User Name</label>
                     <input asp-for="Input.UserName" id="uname" class="border rounded p-2  bg-light w-100" type="text" maxlength="20" required>
@@ -54,7 +52,7 @@
                 </div>
                 <div class="pnumber mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black pnumber" for="pnumber">Phone Number</label>
-                    <input asp-for="Input.PhoneNumber" class="border rounded p-2  bg-light w-100" type="tel" maxlength="11"
+                    <input asp-for="Input.PhoneNumber" id="pnumber" class="border rounded p-2  bg-light w-100" type="tel" maxlength="11"
                            required  >
                     <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                 </div>
@@ -65,23 +63,23 @@
                 </div>
                                 <div class="address mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black address" for="address">Country</label>
-                    <input asp-for="Input.address.Country" id="address" class="border rounded p-2  bg-light w-100" type="text" required>
+                    <input asp-for="Input.address.Country" id="country" class="border rounded p-2  bg-light w-100" type="text" required>
                     <span asp-validation-for="Input.address.Country" class="text-danger"></span>
                 </div>
                 <div class="address mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black address" for="address">City</label>
-                    <input asp-for="Input.address.City" id="address" class="border rounded p-2  bg-light w-100" type="text" required>
+                    <input asp-for="Input.address.City" id="city" class="border rounded p-2  bg-light w-100" type="text" required>
                     <span asp-validation-for="Input.address.City" class="text-danger"></span>
                 </div>
                 <div class="address mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black address" for="address">Street</label>
-                    <input asp-for="Input.address.Street" id="address" class="border rounded p-2  bg-light w-100" type="text" required>
+                    <input asp-for="Input.address.Street" id="street" class="border rounded p-2  bg-light w-100" type="text" required>
                     <span asp-validation-for="Input.address.Street" class="text-danger"></span>
                 </div>
                 <div class="input email mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black email" for="email">Email</label>
                     <input asp-for="Input.Email" id="email" class="border rounded p-2  bg-light w-100 important" type="email" required>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    <span asp-validation-for="Input.Email" class="emailAlrt text-danger"></span>
                 </div>
 
                 <div class="input password mb-3 col-md-6 d-flex flex-column">
@@ -98,7 +96,7 @@
                 </div>
                 <div class=" mb-3 col-md-6 d-flex flex-column">
                     <label class="text-black " for="email"> Gender</label>
-                    <select asp-for="Input.Gender" class="border rounded p-2  bg-light w-100">
+                    <select id="gender" asp-for="Input.Gender" class="border rounded p-2  bg-light w-100">
                         <option selected disabled>Gender</option>
                         <option>M</option>
                         <option>F</option>
@@ -130,7 +128,7 @@
                         </label>
                     </div>
                 </div>
-                <input type="button" class="btn btn-primary py-2 text-white  col-lg-3 ms-lg-2" data-bs-target="#prfilePicModalToggle"
+                <input disabled id="signUp" type="button" class="btn btn-primary py-2 text-white  col-lg-3 ms-lg-2" data-bs-target="#prfilePicModalToggle"
                            value="Next" data-bs-toggle="modal" onclick="return trnsfer()"
                        value="Create Account">
 
@@ -156,8 +154,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary acceptedImg text-white"
-                                       value="Next">
+                                <input type="submit" class="btn btn-primary acceptedImg text-white" value="Submit">
 
 
                             </div>

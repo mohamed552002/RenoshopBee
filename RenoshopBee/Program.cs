@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using RenoshopBee.Data;
 using RenoshopBee.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -16,13 +14,18 @@ using RenoshopBee.Implementation.OrderImp;
 using RenoshopBee.Interfaces.OrderInterfaces;
 using RenoshopBee.Interfaces.OrderItemInterfaces;
 using RenoshopBee.Implementation.OrderItemImp;
+using RenoshopBee.Interfaces.WishlistInterfaces;
+using RenoshopBee.Implementation.WishlistImp;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString1")));
+
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(option => option.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI()
@@ -40,6 +43,7 @@ builder.Services.AddTransient<IProductSortTechnique, SortByPrice>();
 builder.Services.AddTransient<IUserServices, UserContextService>();
 builder.Services.AddTransient<IOrderServices, OrderServices>();
 builder.Services.AddTransient<IOrderItemServices, OrderItemServices>();
+builder.Services.AddTransient<IWishlistServices, WishlistServices>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {
     options.Cookie.Name = "RememberMe";
@@ -68,6 +72,7 @@ app.UseAuthentication();;
 app.UseSession();
 app.UseAuthorization();
 app.MapRazorPages();
+app.UseCors();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

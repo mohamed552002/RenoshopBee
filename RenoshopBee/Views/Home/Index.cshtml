@@ -14,6 +14,7 @@
                 For Clothes, jewelries and Accessories
                 Hope You Enjoy our Website
             </p>
+            <p>@(ViewBag.ItemExist) das</p>
             <button class="btn btn-primary text-uppercase py-2 px-3">Buy now</button>
         </div>
     </div>
@@ -30,6 +31,7 @@
                 eveniet cum odio.
             </p>
         </div>
+        
         <div class="row col-lg-9">
             @foreach (var item in Model.products)
             {
@@ -40,6 +42,11 @@
                             <form method="post">
                                 <button asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.ID" type="submit" class="add-to-cart">
                                     <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </form>
+                            <form method="post" id="wishlistbtn" >
+                                <button asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-productId="@item.ID" type="submit" class="add-to-wishlist">
+                                    <i class="fas fa-heart"></i>
                                 </button>
                             </form>
                         </div>
@@ -131,6 +138,11 @@
                             <button asp-controller="Cart" asp-action="AddToCart" asp-route-id="@product.ID" type="submit" class="add-to-cart">
                         <i class="fas fa-shopping-cart"></i>
                     </button>
+                    </form>
+                    <form method="post">
+                            <button asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-productId="@product.ID" type="submit" class="add-to-wishlist">
+                                <i class="fas fa-heart"></i>
+                            </button>
                     </form>
                 </div>
             </div>

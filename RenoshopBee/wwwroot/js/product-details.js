@@ -78,17 +78,17 @@ addToCartBtn.addEventListener('click', () => {
     }, 5000)
 })
 //add to wishlist btn
-let wishlistBtn = document.getElementById("addToWL");
-wishlistBtn.onclick = function () {
-    if (wishlistBtn.firstElementChild.classList.contains("text-danger")) {
-        wishlistBtn.firstElementChild.classList.remove("fas", "fa-heart", "text-danger");
-        wishlistBtn.firstElementChild.classList.add("far", "fa-heart");
-    }
-    else {
-        wishlistBtn.firstElementChild.classList.remove("far", "fa-heart");
-        wishlistBtn.firstElementChild.classList.add("fas", "fa-heart", "text-danger");
-    }
-}
+//let wishlistBtn = document.getElementById("addToWL");
+//wishlistBtn.onclick = function () {
+//    if (wishlistBtn.firstElementChild.classList.contains("text-danger")) {
+//        wishlistBtn.firstElementChild.classList.remove("fas", "fa-heart", "text-danger");
+//        wishlistBtn.firstElementChild.classList.add("far", "fa-heart");
+//    }
+//    else {
+//        wishlistBtn.firstElementChild.classList.remove("far", "fa-heart");
+//        wishlistBtn.firstElementChild.classList.add("fas", "fa-heart", "text-danger");
+//    }
+//}
 //navtap section
 let navLinks = document.querySelectorAll(".nav-link");
 navLinks.forEach((link) => {

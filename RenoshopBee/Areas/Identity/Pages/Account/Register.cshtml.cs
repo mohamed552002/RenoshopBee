@@ -114,7 +114,7 @@ namespace RenoshopBee.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(IFormFile? formFile,string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(IFormFile? formFile,InputModel Input, string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -136,28 +136,29 @@ namespace RenoshopBee.Areas.Identity.Pages.Account
                     formFile.CopyTo(stream);
                     await stream.DisposeAsync();
                 }
-                var addressIn = new Address
-                {
-                    Country = Input.address.Country,
-                    City = Input.address.City,
-                    Street = Input.address.Street,
-                    
-                };
-                var user = new ApplicationUser
-                {
-                    UserName = Input.UserName,
-                    FirstName = Input.FirstName,
-                    LastName = Input.LastName,
-                    BirthDate = Input.BirthDate,
-                    Email = Input.Email,
-                    Gender = Input.Gender,
-                    EmailReceiveable = Input.EmailReceiveable,
-                    PhoneNumber = Input.PhoneNumber,
-                    Img_Url = Input.Img_Url,
-                    address=addressIn
-                    
-                };
-                addressIn.ApplicationUserId = user.Id;
+                //var addressIn = new Address
+                //{
+                //    Country = Input.address.Country,
+                //    City = Input.address.City,
+                //    Street = Input.address.Street,
+
+                //};
+                //var user = new ApplicationUser
+                //{
+                //    UserName = Input.UserName,
+                //    FirstName = Input.FirstName,
+                //    LastName = Input.LastName,
+                //    BirthDate = Input.BirthDate,
+                //    Email = Input.Email,
+                //    Gender = Input.Gender,
+                //    EmailReceiveable = Input.EmailReceiveable,
+                //    PhoneNumber = Input.PhoneNumber,
+                //    Img_Url = Input.Img_Url,
+                //    address=addressIn
+
+                //};
+                ApplicationUser user = Input;
+                user.address.ApplicationUserId = user.Id;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

@@ -176,14 +176,14 @@ section.best-selling .row .product-card .product-img .product-buttons, section.f
   transition: 0.3s;
 }
 
-    section.best-selling .row .product-card .product-img .product-buttons > div, section.featured-products .row .product-card .product-img .product-buttons > div, .add-to-cart, section.dashboard .products-content .products-grid .product-card .product-img .product-buttons > div, section.dashboard .sellers-content .products-grid .product-card .product-img .product-buttons > div, .sellers-requests-grid .request .requested-product .porduct-info .product-img .product-buttons > div, .related-products .products-grid .product-card .product-img .product-buttons > div, section.product-section-grid .products-grid .product-card .product-img .product-buttons > div {
+    section.best-selling .row .product-card .product-img .product-buttons > div, section.featured-products .row .product-card .product-img .product-buttons > div, .product-buttons .add-to-wishlist, .add-to-cart, section.dashboard .products-content .products-grid .product-card .product-img .product-buttons > div, section.dashboard .sellers-content .products-grid .product-card .product-img .product-buttons > div, .sellers-requests-grid .request .requested-product .porduct-info .product-img .product-buttons > div, .related-products .products-grid .product-card .product-img .product-buttons > div, section.product-section-grid .products-grid .product-card .product-img .product-buttons > div {
         background-color: var(--main-color);
         color: white;
         margin-bottom: 10px;
         padding: 8px;
         display: -webkit-box;
         display: -ms-flexbox;
-        border:0;
+        border: 0;
         display: flex;
         -webkit-box-align: center;
         -ms-flex-align: center;
@@ -196,7 +196,7 @@ section.best-selling .row .product-card .product-img .product-buttons, section.f
         cursor: pointer;
     }
 
-        section.best-selling .row .product-card .product-img .product-buttons > div:hover, section.featured-products .row .product-card .product-img .product-buttons > div:hover, .product-buttons form .add-to-cart:hover, section.dashboard .products-content .products-grid .product-card .product-img .product-buttons > div:hover, section.dashboard .sellers-content .products-grid .product-card .product-img .product-buttons > div:hover, .sellers-requests-grid .request .requested-product .porduct-info .product-img .product-buttons > div:hover, .related-products .products-grid .product-card .product-img .product-buttons > div:hover, section.product-section-grid .products-grid .product-card .product-img .product-buttons > div:hover {
+        section.best-selling .row .product-card .product-img .product-buttons > div:hover, .product-buttons form .add-to-wishlist:hover, section.featured-products .row .product-card .product-img .product-buttons > div:hover, .product-buttons form .add-to-cart:hover, section.dashboard .products-content .products-grid .product-card .product-img .product-buttons > div:hover, section.dashboard .sellers-content .products-grid .product-card .product-img .product-buttons > div:hover, .sellers-requests-grid .request .requested-product .porduct-info .product-img .product-buttons > div:hover, .related-products .products-grid .product-card .product-img .product-buttons > div:hover, section.product-section-grid .products-grid .product-card .product-img .product-buttons > div:hover {
             background-color: rgba(var(--main-color), 0.75);
         }
 
@@ -269,7 +269,10 @@ section.dashboard .products-content .pages .next-btn:hover, section.dashboard .s
 }
 
 .login-body .pics, .sign-up-body .pics {
-  position: relative;
+    max-height: 53rem;
+    position: relative;
+    width: 35%;
+    overflow: hidden;
 }
 
 .login-body .pics .info, .sign-up-body .pics .info {
@@ -315,12 +318,12 @@ section.dashboard .products-content .pages .next-btn:hover, section.dashboard .s
 }
 
 .login-body .pics img, .sign-up-body .pics img {
-  width: 100%;
-  height: 629px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: 50% 75%;
-     object-position: 50% 75%;
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: 50% 75%;
+    object-position: 50% 75%;
 }
 
 @media (max-width: 991px) {
@@ -1515,9 +1518,7 @@ section.dashboard .sellers-content .product-tags .addTag:focus-visible {
   cursor: pointer;
 }
 
-.reviews-section .rating-selection div:hover {
-  color: #ff9600 !important;
-}
+
 section .filtering-products .sort ul li {
     cursor: pointer;
 }
@@ -1854,3 +1855,63 @@ header .card-items {
     height: 18px;
     background-color: #3cb554;
 }
+.notfication {
+    text-align: center;
+    width: 30%;
+    position: fixed;
+    top: 20px;
+    left: 35%;
+    margin: auto;
+    padding: 10px;
+    background-color: var(--main-color);
+    border: 1px solid;
+    border-radius: 5px;
+    z-index: 100;
+    transition:0.6s;
+}
+.notfication p{
+    all:unset;
+}
+.rating-choose select {
+    all: unset;
+    appearance: none; /* Hide default styles */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 150px; /* Set the width as desired */
+    height: 30px; /* Set the height as desired */
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px; /* Adjust the font size */
+    outline: none;
+}
+.rating-choose select option {
+    display: inline-block;
+    padding: 5px;
+    margin: 2px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color:yellow;
+}
+    .rating-choose select option:checked{
+        color:darkgoldenrod;
+    }
+    .rating-choose select:checked {
+        all: unset;
+    }
+    .rating-choose select:active {
+        all: unset;
+    }
+.rating-selection .star {
+    color: darkgrey;
+    font-size: 25px;
+    padding-left: 5px;
+    cursor:pointer;
+}
+
+    .rating-selection .star:hover,
+    .rating-selection .star.selected {
+        color: #ff9600;
+    }
+  
